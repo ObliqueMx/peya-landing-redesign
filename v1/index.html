@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Archivo:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+html{scroll-behavior:smooth}
+body{margin:0;background:#f7f6f2;color:#14170f;font-family:Archivo,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#01390d;text-decoration:none}
+a:hover{color:#0a5a19}
+@keyframes ea-sheen{0%{background-position:0% 50%}100%{background-position:200% 50%}}
+
+input:focus,textarea:focus,select:focus{outline:none;border-color:#01390d !important}
+::selection{background:#01390d;color:#f7f6f2}
+</style>
+</helmet>
+
+<div style="max-width:100%;overflow-x:hidden">
+
+<sc-if value="{{ mostrarNotas }}" hint-placeholder-val="{{ true }}"><aside id="notas" style="background:#14170f;color:#e9e7df;padding:26px 30px;font-size:12.5px;line-height:1.65;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px 34px;border-bottom:3px solid #c8a44c">
+  <div style="grid-column:1/-1;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap">
+    <span style="font-family:'Instrument Serif',serif;font-size:19px;color:#fff">Notas de diseño</span>
+    <span style="font-family:ui-monospace,Menlo,monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:#8d9a86">supuestos · pendientes · placeholders</span>
+  </div>
+  <div>
+    <div style="font-weight:600;color:#fff;margin-bottom:6px">Supuestos que tomé</div>
+    Solo me indicaste <em>Fiscal</em> como área, así que la estructuré como despacho especializado en materia fiscal, con sub-áreas. Sitio en español, tono institucional sobrio, objetivo principal: agendar consulta.
+  </div>
+  <div>
+    <div style="font-weight:600;color:#fff;margin-bottom:6px">Contenido a confirmar</div>
+    Las 8 sub-áreas, los 3 casos y los datos de los socios son propuestas de estructura, no información real. Los datos de contacto los tomé de fuentes públicas: verifícalos.
+  </div>
+  <div>
+    <div style="font-weight:600;color:#fff;margin-bottom:6px">Placeholders</div>
+    Los recuadros con punteado son espacios para fotografía real (equipo y oficina). Mientras no exista, el diseño funciona sin ellas.
+  </div>
+  <div>
+    <div style="font-weight:600;color:#fff;margin-bottom:6px">Controles disponibles</div>
+    En el panel de ajustes puedes ocultar estas notas y desactivar las animaciones de entrada para revisar el contenido en frío.
+  </div>
+</aside></sc-if>
+
+<header data-ea-header style="position:sticky;top:0;z-index:50;background:rgba(247,246,242,0.82);backdrop-filter:blur(14px);border-bottom:1px solid rgba(1,57,13,0.12);transition:padding .35s cubic-bezier(.22,1,.36,1),background .35s ease">
+  <div style="max-width:1240px;margin:0 auto;padding:16px 32px;display:flex;align-items:center;gap:28px">
+    <a href="#inicio" style="display:flex;align-items:center;gap:13px;flex:none">
+      <span data-ea-mark style="width:38px;height:38px;flex:none;background:#01390d;mask:url(assets/ea-logo.svg) center/contain no-repeat;transition:transform .6s cubic-bezier(.22,1,.36,1)" style-hover="transform:rotate(-10deg) scale(1.07)"></span>
+      <span style="display:flex;flex-direction:column;line-height:1">
+        <span style="font-family:'Instrument Serif',serif;font-size:21px;color:#01390d;letter-spacing:.005em">Espinoza Abogados</span>
+        <span style="font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:#6b7365;margin-top:5px;font-weight:500">Paolo Espinoza y Asociados</span>
+      </span>
+    </a>
+    <nav style="margin-left:auto;display:flex;align-items:center;gap:6px">
+      <a data-ea-navlink href="#areas" style="position:relative;padding:9px 13px;font-size:13.5px;color:#3a4136;transition:color .25s ease" style-hover="color:#01390d">Áreas de práctica</a>
+      <a data-ea-navlink href="#despacho" style="position:relative;padding:9px 13px;font-size:13.5px;color:#3a4136;transition:color .25s ease" style-hover="color:#01390d">El despacho</a>
+      <a data-ea-navlink href="#equipo" style="position:relative;padding:9px 13px;font-size:13.5px;color:#3a4136;transition:color .25s ease" style-hover="color:#01390d">Socios</a>
+      <a data-ea-navlink href="#casos" style="position:relative;padding:9px 13px;font-size:13.5px;color:#3a4136;transition:color .25s ease" style-hover="color:#01390d">Casos</a>
+      <a href="#contacto" style="margin-left:14px;display:inline-flex;align-items:center;gap:9px;padding:12px 19px;border-radius:2px;background:#01390d;color:#f7f6f2;font-size:13px;font-weight:500;letter-spacing:.01em;transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s ease" style-hover="transform:translateY(-2px);box-shadow:0 10px 24px -10px rgba(1,57,13,.6);color:#dfc486">
+        Agendar consulta
+        <span style="display:inline-block;transition:transform .35s cubic-bezier(.22,1,.36,1)">→</span>
+      </a>
+    </nav>
+  </div>
+</header>
+
+<section id="inicio" style="position:relative;background:#01390d;color:#f2f1ea;overflow:hidden">
+  <canvas data-ea-dots style="position:absolute;inset:0;width:100%;height:100%;display:block"></canvas>
+  <div data-ea-seal style="position:absolute;top:-90px;right:-150px;width:720px;height:720px;background:linear-gradient(105deg,rgba(242,241,234,.05) 20%,rgba(242,241,234,.22) 45%,rgba(242,241,234,.05) 70%);background-size:200% 100%;mask:url(assets/ea-logo.svg) center/contain no-repeat;animation:ea-sheen 14s linear infinite;pointer-events:none"></div>
+  <div style="position:relative;max-width:1240px;margin:0 auto;padding:118px 32px 96px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:48px 56px;align-items:end">
+    <div>
+      <div data-rv style="display:inline-flex;align-items:center;gap:11px;padding:7px 14px 7px 11px;border:1px solid rgba(242,241,234,.3);border-radius:999px;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:#cfd6c9;margin-bottom:34px">
+        <span style="width:6px;height:6px;border-radius:50%;background:#c8a44c;box-shadow:0 0 0 4px rgba(200,164,76,.22)"></span>
+        Práctica fiscal · Ciudad de México
+      </div>
+      <h1 data-rv style="font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(42px,5.6vw,82px);line-height:1.02;letter-spacing:-.015em;margin:0 0 28px;color:#fff;text-wrap:balance">
+        Defensa fiscal con<br>criterio, no con<br><em style="font-style:italic;color:#dfc486">improvisación</em>.
+      </h1>
+      <p data-rv style="max-width:53ch;font-size:17px;line-height:1.62;color:#cbd3c4;margin:0 0 40px;text-wrap:pretty">
+        Acompañamos a empresas, grupos familiares y clientes extranjeros con operación en México en consultoría, cumplimiento y litigio en materia fiscal. Cada asunto lo lleva un socio, de principio a fin.
+      </p>
+      <div data-rv style="display:flex;flex-wrap:wrap;gap:14px;align-items:center">
+        <a href="#contacto" style="display:inline-flex;align-items:center;gap:10px;padding:16px 26px;background:#f7f6f2;color:#01390d;border-radius:2px;font-size:14.5px;font-weight:500;transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s ease" style-hover="transform:translateY(-2px);box-shadow:0 14px 30px -12px rgba(0,0,0,.55);color:#01390d">
+          Agendar una consulta
+          <span style="font-size:15px">→</span>
+        </a>
+        <a href="#areas" style="display:inline-flex;align-items:center;gap:10px;padding:16px 22px;border:1px solid rgba(242,241,234,.32);border-radius:2px;color:#e6e9e0;font-size:14.5px;transition:border-color .3s ease,background .3s ease" style-hover="border-color:#c8a44c;background:rgba(200,164,76,.1);color:#fff">
+          Ver áreas de práctica
+        </a>
+      </div>
+    </div>
+    <div data-rv style="border-left:1px solid rgba(242,241,234,.22);padding-left:32px;display:flex;flex-direction:column;gap:30px">
+      <div>
+        <div style="font-family:'Instrument Serif',serif;font-size:46px;line-height:1;color:#fff"><span data-ea-count data-to="18">0</span></div>
+        <div style="font-size:12.5px;letter-spacing:.06em;color:#a9b5a3;margin-top:8px;line-height:1.4">años litigando<br>materia fiscal</div>
+      </div>
+      <div>
+        <div style="font-family:'Instrument Serif',serif;font-size:46px;line-height:1;color:#fff"><span data-ea-count data-to="340">0</span><span style="font-size:28px">+</span></div>
+        <div style="font-size:12.5px;letter-spacing:.06em;color:#a9b5a3;margin-top:8px;line-height:1.4">asuntos atendidos<br>ante el SAT y el TFJA</div>
+      </div>
+      <div>
+        <div style="font-family:'Instrument Serif',serif;font-size:46px;line-height:1;color:#fff"><span data-ea-count data-to="4">0</span></div>
+        <div style="font-size:12.5px;letter-spacing:.06em;color:#a9b5a3;margin-top:8px;line-height:1.4">socios responsables<br>de cada expediente</div>
+      </div>
+      <div style="font-family:ui-monospace,Menlo,monospace;font-size:10px;letter-spacing:.06em;color:#a9b5a3;border-top:1px dashed rgba(242,241,234,.22);padding-top:12px">cifras de ejemplo — confirmar</div>
+    </div>
+  </div>
+</section>
+
+<section style="background:#eceae2;border-bottom:1px solid rgba(1,57,13,.09)">
+  <div style="max-width:1240px;margin:0 auto;padding:22px 32px;display:flex;align-items:center;gap:34px;flex-wrap:wrap;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#5d6657">
+    <span style="font-weight:600;color:#01390d">Atendemos</span>
+    <span>Empresas y direcciones jurídicas</span>
+    <span style="color:#b3b8ab">/</span>
+    <span>Patrimonios familiares</span>
+    <span style="color:#b3b8ab">/</span>
+    <span>Personas físicas con asunto urgente</span>
+    <span style="color:#b3b8ab">/</span>
+    <span>Clientes extranjeros en México</span>
+  </div>
+</section>
+
+<section id="areas" style="background:#f7f6f2;border-top:1px solid rgba(1,57,13,.1)">
+  <div style="max-width:1240px;margin:0 auto;padding:96px 32px 92px">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:40px;flex-wrap:wrap;margin-bottom:44px">
+      <div>
+        <div data-rv style="display:flex;align-items:center;gap:12px;margin-bottom:18px">
+          <span style="width:17px;height:17px;background:#01390d;mask:url(assets/ea-logo.svg) center/contain no-repeat;opacity:.75"></span>
+          <span style="font-family:ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#7a8374">Exp. 01 — Áreas de práctica</span>
+        </div>
+        <h2 data-rv style="font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(32px,3.6vw,50px);line-height:1.06;letter-spacing:-.012em;margin:0;max-width:24ch;color:#14170f">Una sola materia,<br><em style="font-style:italic;color:#8a6d1f">abierta por expediente</em></h2>
+      </div>
+      <p data-rv style="max-width:36ch;font-size:14.5px;line-height:1.66;color:#4e5648;margin:0 0 6px">Recorra el índice: cada línea abre el detalle de lo que revisamos, qué incluye el trabajo y la señal que normalmente lo detona.</p>
+    </div>
+
+    <div style="display:flex;flex-wrap:wrap;align-items:stretch;border-top:1px solid rgba(1,57,13,.16);border-bottom:1px solid rgba(1,57,13,.16)">
+      <div data-rv style="flex:1 1 280px;min-width:0;border-right:1px solid rgba(1,57,13,.16)">
+        <sc-for list="{{ areas }}" as="a" hint-placeholder-count="8">
+          <div onClick="{{ a.select }}" onMouseEnter="{{ a.select }}" style="{{ a.rowStyle }}">
+            <span style="font-family:ui-monospace,Menlo,monospace;font-size:10.5px;letter-spacing:.06em;opacity:.6">{{ a.folio }}</span>
+            <span style="font-family:'Instrument Serif',serif;font-size:21px;line-height:1.2">{{ a.titulo }}</span>
+            <span style="{{ a.markStyle }}"></span>
+          </div>
+        </sc-for>
+      </div>
+
+      <div data-ea-panel style="flex:1 1 400px;min-width:0;position:relative;background:#01390d;color:#eef0e9;overflow:hidden;min-height:430px">
+        <div style="position:absolute;inset:0;background-image:radial-gradient(rgba(238,240,233,0.15) 1px,transparent 1px);background-size:20px 20px;opacity:.8"></div>
+        <div style="position:absolute;top:-70px;right:-90px;width:330px;height:330px;background:rgba(238,240,233,.07);mask:url(assets/ea-logo.svg) center/contain no-repeat"></div>
+        <div data-ea-panel-body style="position:relative;padding:36px clamp(22px,3vw,40px) 34px;display:flex;flex-direction:column;height:100%;box-sizing:border-box">
+          <div style="font-family:ui-monospace,Menlo,monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:#a9b5a3;margin-bottom:20px">Folio {{ activa.folio }} · materia fiscal</div>
+          <h3 style="font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(28px,2.6vw,38px);line-height:1.08;margin:0 0 16px;color:#fff;max-width:24ch">{{ activa.titulo }}</h3>
+          <p style="font-size:15.5px;line-height:1.64;color:#c7cfc0;margin:0 0 30px;max-width:48ch">{{ activa.resumen }}</p>
+          <div style="font-family:ui-monospace,Menlo,monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:#a9b5a3;margin-bottom:6px">Qué incluye</div>
+          <sc-for list="{{ activa.incluye }}" as="it" hint-placeholder-count="4">
+            <div style="display:grid;grid-template-columns:14px 1fr;gap:12px;align-items:baseline;padding:11px 0;border-top:1px solid rgba(238,240,233,.16);font-size:14.5px;line-height:1.5;color:#e2e6db">
+              <span style="font-family:ui-monospace,Menlo,monospace;font-size:10px;color:#dfc486">—</span>
+              <span>{{ it }}</span>
+            </div>
+          </sc-for>
+          <div style="margin-top:auto;padding-top:28px;display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap">
+            <div style="max-width:40ch">
+              <div style="font-family:ui-monospace,Menlo,monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:#a9b5a3;margin-bottom:7px">Señal típica</div>
+              <div style="font-size:14px;line-height:1.55;color:#cdd5c6">{{ activa.senal }}</div>
+            </div>
+            <a href="#contacto" style="display:inline-flex;align-items:center;gap:9px;padding:13px 20px;border:1px solid rgba(200,164,76,.7);border-radius:2px;color:#fff;font-size:13.5px;transition:background .3s ease,border-color .3s ease" style-hover="background:rgba(200,164,76,.16);border-color:#dfc486;color:#fff">Consultar este tema <span>→</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p style="font-family:ui-monospace,Menlo,monospace;font-size:10.5px;letter-spacing:.05em;color:#8b9384;margin:16px 0 0">sub-áreas propuestas — ajustar a la práctica real del despacho</p>
+  </div>
+</section>
+
+<section id="despacho" style="background:#14170f;color:#e9e7df;position:relative;overflow:hidden">
+  <div style="position:absolute;inset:0;background-image:radial-gradient(rgba(233,231,223,0.08) 1px,transparent 1px);background-size:26px 26px"></div>
+  <div style="position:relative;max-width:1240px;margin:0 auto;padding:104px 32px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:64px;align-items:start">
+    <div>
+      <div data-rv style="font-family:ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#8d9a86;margin-bottom:18px;padding-bottom:10px;border-bottom:1px solid rgba(200,164,76,.5);display:inline-block">02 — El despacho</div>
+      <h2 data-rv style="font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(30px,3.4vw,46px);line-height:1.1;margin:0 0 26px;color:#fff;max-width:20ch">Cómo trabajamos un asunto fiscal</h2>
+      <p data-rv style="font-size:16px;line-height:1.68;color:#bcc4b5;margin:0 0 20px;max-width:46ch">No entregamos un escrito y esperamos. Definimos la estrategia completa antes de contestar el primer requerimiento, y el cliente sabe en qué etapa está su expediente en todo momento.</p>
+      <p data-rv style="font-size:16px;line-height:1.68;color:#bcc4b5;margin:0;max-width:46ch">Un socio responde por cada caso. Esa es la diferencia práctica entre un despacho especializado y un área fiscal dentro de una firma generalista.</p>
+    </div>
+    <div style="display:flex;flex-direction:column">
+      <div data-rv style="display:grid;grid-template-columns:44px 1fr;gap:20px;padding:24px 0;border-top:1px solid rgba(233,231,223,.16)">
+        <span style="font-family:'Instrument Serif',serif;font-size:26px;color:#dfc486;line-height:1">I</span>
+        <div><div style="font-size:16px;color:#fff;margin-bottom:7px">Lectura del expediente</div><div style="font-size:14px;line-height:1.6;color:#a8b1a1">Revisamos antecedentes, plazos y actuaciones previas antes de opinar. Sin diagnóstico no hay estrategia.</div></div>
+      </div>
+      <div data-rv style="display:grid;grid-template-columns:44px 1fr;gap:20px;padding:24px 0;border-top:1px solid rgba(233,231,223,.16)">
+        <span style="font-family:'Instrument Serif',serif;font-size:26px;color:#dfc486;line-height:1">II</span>
+        <div><div style="font-size:16px;color:#fff;margin-bottom:7px">Escenarios y costo</div><div style="font-size:14px;line-height:1.6;color:#a8b1a1">Presentamos las vías posibles, el riesgo de cada una y el honorario correspondiente, por escrito.</div></div>
+      </div>
+      <div data-rv style="display:grid;grid-template-columns:44px 1fr;gap:20px;padding:24px 0;border-top:1px solid rgba(233,231,223,.16)">
+        <span style="font-family:'Instrument Serif',serif;font-size:26px;color:#dfc486;line-height:1">III</span>
+        <div><div style="font-size:16px;color:#fff;margin-bottom:7px">Ejecución con un socio al frente</div><div style="font-size:14px;line-height:1.6;color:#a8b1a1">El socio que estudió el caso es el que lo firma, lo litiga y lo explica.</div></div>
+      </div>
+      <div data-rv style="display:grid;grid-template-columns:44px 1fr;gap:20px;padding:24px 0;border-top:1px solid rgba(233,231,223,.16);border-bottom:1px solid rgba(233,231,223,.16)">
+        <span style="font-family:'Instrument Serif',serif;font-size:26px;color:#dfc486;line-height:1">IV</span>
+        <div><div style="font-size:16px;color:#fff;margin-bottom:7px">Reporte y cierre</div><div style="font-size:14px;line-height:1.6;color:#a8b1a1">Informe de cada etapa y recomendaciones para evitar que el asunto se repita.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="equipo" style="max-width:1240px;margin:0 auto;padding:104px 32px 90px">
+  <div data-rv style="font-family:ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#7a8374;margin-bottom:18px;padding-bottom:10px;border-bottom:1px solid rgba(200,164,76,.55);display:inline-block">03 — Socios y equipo</div>
+  <h2 data-rv style="font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(32px,3.6vw,50px);line-height:1.08;margin:0 0 48px;color:#14170f;max-width:24ch">Quién va a llevar su asunto</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:30px">
+    <article data-rv style="display:flex;flex-direction:column;gap:16px">
+      <div style="aspect-ratio:3/4;border:1px dashed rgba(1,57,13,.35);background-image:radial-gradient(rgba(1,57,13,.13) 1px,transparent 1px);background-size:9px 9px;display:flex;align-items:flex-end;padding:14px;transition:transform .5s cubic-bezier(.22,1,.36,1)" style-hover="transform:translateY(-6px)">
+        <span style="font-family:ui-monospace,Menlo,monospace;font-size:10px;letter-spacing:.06em;color:#01390d;background:#f7f6f2;padding:4px 7px">retrato socio 01</span>
+      </div>
+      <div>
+        <div style="font-family:'Instrument Serif',serif;font-size:23px;color:#01390d;line-height:1.15">Paolo Espinoza</div>
+        <div style="font-size:13px;color:#5d6657;margin-top:6px">Socio director · Litigio fiscal</div>
+      </div>
+    </article>
+    <article data-rv style="display:flex;flex-direction:column;gap:16px">
+      <div style="aspect-ratio:3/4;border:1px dashed rgba(1,57,13,.35);background-image:radial-gradient(rgba(1,57,13,.13) 1px,transparent 1px);background-size:9px 9px;display:flex;align-items:flex-end;padding:14px;transition:transform .5s cubic-bezier(.22,1,.36,1)" style-hover="transform:translateY(-6px)">
+        <span style="font-family:ui-monospace,Menlo,monospace;font-size:10px;letter-spacing:.06em;color:#01390d;background:#f7f6f2;padding:4px 7px">retrato socio 02</span>
+      </div>
+      <div>
+        <div style="font-family:'Instrument Serif',serif;font-size:23px;color:#01390d;line-height:1.15">Nombre del socio</div>
+        <div style="font-size:13px;color:#5d6657;margin-top:6px">Socio · Consultoría y cumplimiento</div>
+      </div>
+    </article>
+    <article data-rv style="display:flex;flex-direction:column;gap:16px">
+      <div style="aspect-ratio:3/4;border:1px dashed rgba(1,57,13,.35);background-image:radial-gradient(rgba(1,57,13,.13) 1px,transparent 1px);background-size:9px 9px;display:flex;align-items:flex-end;padding:14px;transition:transform .5s cubic-bezier(.22,1,.36,1)" style-hover="transform:translateY(-6px)">
+        <span style="font-family:ui-monospace,Menlo,monospace;font-size:10px;letter-spacing:.06em;color:#01390d;background:#f7f6f2;padding:4px 7px">retrato socio 03</span>
+      </div>
+      <div>
+        <div style="font-family:'Instrument Serif',serif;font-size:23px;color:#01390d;line-height:1.15">Nombre del socio</div>
+        <div style="font-size:13px;color:#5d6657;margin-top:6px">Socio · Comercio exterior</div>
+      </div>
+    </article>
+    <article data-rv style="display:flex;flex-direction:column;gap:16px">
+      <div style="aspect-ratio:3/4;border:1px dashed rgba(1,57,13,.35);background-image:radial-gradient(rgba(1,57,13,.13) 1px,transparent 1px);background-size:9px 9px;display:flex;align-items:flex-end;padding:14px;transition:transform .5s cubic-bezier(.22,1,.36,1)" style-hover="transform:translateY(-6px)">
+        <span style="font-family:ui-monospace,Menlo,monospace;font-size:10px;letter-spacing:.06em;color:#01390d;background:#f7f6f2;padding:4px 7px">retrato socio 04</span>
+      </div>
+      <div>
+        <div style="font-family:'Instrument Serif',serif;font-size:23px;color:#01390d;line-height:1.15">Nombre del socio</div>
+        <div style="font-size:13px;color:#5d6657;margin-top:6px">Asociada · Precios de transferencia</div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="casos" style="background:#eceae2;border-top:1px solid rgba(1,57,13,.09)">
+  <div style="max-width:1240px;margin:0 auto;padding:100px 32px">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:40px;flex-wrap:wrap;margin-bottom:46px">
+      <div>
+        <div data-rv style="font-family:ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#7a8374;margin-bottom:18px;padding-bottom:10px;border-bottom:1px solid rgba(200,164,76,.55);display:inline-block">04 — Casos y resultados</div>
+        <h2 data-rv style="font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(32px,3.6vw,50px);line-height:1.08;margin:0;color:#14170f;max-width:22ch">Asuntos representativos</h2>
+      </div>
+      <p data-rv style="max-width:34ch;font-size:14px;line-height:1.66;color:#4e5648;margin:0">Casos anonimizados por confidencialidad. Los montos y materias deben validarse antes de publicarse.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:24px">
+      <article data-rv style="background:#f7f6f2;border:1px solid rgba(1,57,13,.12);padding:32px 28px;display:flex;flex-direction:column;gap:18px;transition:transform .45s cubic-bezier(.22,1,.36,1),box-shadow .45s ease,border-color .45s ease" style-hover="transform:translateY(-5px);box-shadow:0 18px 40px -22px rgba(1,57,13,.45);border-color:#c8a44c">
+        <span style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#7a8374">Juicio de nulidad · TFJA</span>
+        <div style="font-family:'Instrument Serif',serif;font-size:40px;line-height:1;color:#01390d;padding-top:16px;border-top:1px solid rgba(200,164,76,.6)">$ 42 M</div>
+        <p style="font-size:14.5px;line-height:1.6;color:#4e5648;margin:0">Crédito fiscal determinado a una empresa manufacturera, declarado nulo por indebida fundamentación de la revisión electrónica.</p>
+        <span style="margin-top:auto;font-family:ui-monospace,Menlo,monospace;font-size:10px;color:#8b9384">ejemplo — confirmar</span>
+      </article>
+      <article data-rv style="background:#f7f6f2;border:1px solid rgba(1,57,13,.12);padding:32px 28px;display:flex;flex-direction:column;gap:18px;transition:transform .45s cubic-bezier(.22,1,.36,1),box-shadow .45s ease,border-color .45s ease" style-hover="transform:translateY(-5px);box-shadow:0 18px 40px -22px rgba(1,57,13,.45);border-color:#c8a44c">
+        <span style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#7a8374">Devolución de saldo a favor</span>
+        <div style="font-family:'Instrument Serif',serif;font-size:40px;line-height:1;color:#01390d;padding-top:16px;border-top:1px solid rgba(200,164,76,.6)">11 meses</div>
+        <p style="font-size:14.5px;line-height:1.6;color:#4e5648;margin:0">Recuperación de IVA a favor negado en dos ocasiones, obtenido tras integrar el soporte documental y recurrir la negativa.</p>
+        <span style="margin-top:auto;font-family:ui-monospace,Menlo,monospace;font-size:10px;color:#8b9384">ejemplo — confirmar</span>
+      </article>
+      <article data-rv style="background:#f7f6f2;border:1px solid rgba(1,57,13,.12);padding:32px 28px;display:flex;flex-direction:column;gap:18px;transition:transform .45s cubic-bezier(.22,1,.36,1),box-shadow .45s ease,border-color .45s ease" style-hover="transform:translateY(-5px);box-shadow:0 18px 40px -22px rgba(1,57,13,.45);border-color:#c8a44c">
+        <span style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#7a8374">Grupo extranjero · Tratado</span>
+        <div style="font-family:'Instrument Serif',serif;font-size:40px;line-height:1;color:#01390d;padding-top:16px;border-top:1px solid rgba(200,164,76,.6)">0 sanción</div>
+        <p style="font-size:14.5px;line-height:1.6;color:#4e5648;margin:0">Revisión de retenciones a residentes en el extranjero concluida sin crédito determinado ni multa para el contribuyente.</p>
+        <span style="margin-top:auto;font-family:ui-monospace,Menlo,monospace;font-size:10px;color:#8b9384">ejemplo — confirmar</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="contacto" style="background:#01390d;color:#f2f1ea;position:relative;overflow:hidden">
+  <div style="position:absolute;inset:0;background-image:radial-gradient(rgba(242,241,234,0.12) 1px,transparent 1px);background-size:22px 22px;opacity:.6"></div>
+  <div style="position:relative;max-width:1240px;margin:0 auto;padding:100px 32px;display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:64px">
+    <div>
+      <div data-rv style="font-family:ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#9fae98;margin-bottom:18px;padding-bottom:10px;border-bottom:1px solid rgba(200,164,76,.5);display:inline-block">05 — Contacto</div>
+      <h2 data-rv style="font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(32px,3.6vw,50px);line-height:1.08;margin:0 0 24px;color:#fff;max-width:20ch">Cuéntenos en qué etapa está su asunto</h2>
+      <p data-rv style="font-size:16px;line-height:1.66;color:#c3cbbc;margin:0 0 38px;max-width:44ch">Si hay un plazo corriendo, indíquelo en el mensaje. Respondemos el mismo día hábil.</p>
+      <div data-rv style="display:flex;flex-direction:column;gap:22px;font-size:14.5px;line-height:1.6">
+        <div>
+          <div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#9fae98;margin-bottom:7px">Oficina</div>
+          Av. Revolución 1225, Capital Park San Ángel<br>Piso 4, Despacho 413, Col. Los Alpes<br>C.P. 01010, Ciudad de México
+        </div>
+        <div>
+          <div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#9fae98;margin-bottom:7px">Directo</div>
+          <a href="tel:+525554199450" style="color:#fff;border-bottom:1px solid rgba(255,255,255,.3);padding-bottom:2px;transition:border-color .3s ease" style-hover="border-color:#fff;color:#fff">(55) 5419 9450</a><br>
+          <a href="mailto:contacto@espinozabogados.com" style="color:#fff;border-bottom:1px solid rgba(255,255,255,.3);padding-bottom:2px;transition:border-color .3s ease" style-hover="border-color:#fff;color:#fff">contacto@espinozabogados.com</a>
+        </div>
+        <div style="font-family:ui-monospace,Menlo,monospace;font-size:10px;letter-spacing:.05em;color:#a9b5a3">datos tomados de fuentes públicas — verificar</div>
+      </div>
+    </div>
+    <form data-rv onSubmit="{{ onSubmit }}" style="display:flex;flex-direction:column;gap:18px;background:rgba(242,241,234,.05);border:1px solid rgba(242,241,234,.18);padding:34px 30px">
+      <label style="display:flex;flex-direction:column;gap:8px;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:#a9b5a3">Nombre
+        <input type="text" placeholder="Nombre y apellido" style="background:transparent;border:0;border-bottom:1px solid rgba(242,241,234,.3);padding:11px 0;color:#fff;font-family:Archivo,sans-serif;font-size:15px;letter-spacing:0;text-transform:none;transition:border-color .3s ease">
+      </label>
+      <label style="display:flex;flex-direction:column;gap:8px;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:#a9b5a3">Correo o teléfono
+        <input type="text" placeholder="Por dónde prefiere que le respondamos" style="background:transparent;border:0;border-bottom:1px solid rgba(242,241,234,.3);padding:11px 0;color:#fff;font-family:Archivo,sans-serif;font-size:15px;letter-spacing:0;text-transform:none;transition:border-color .3s ease">
+      </label>
+      <label style="display:flex;flex-direction:column;gap:8px;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:#a9b5a3">Materia
+        <select style="background:transparent;border:0;border-bottom:1px solid rgba(242,241,234,.3);padding:11px 0;color:#fff;font-family:Archivo,sans-serif;font-size:15px;letter-spacing:0;text-transform:none">
+          <option style="color:#14170f">Consultoría y planeación</option>
+          <option style="color:#14170f">Litigio y defensa fiscal</option>
+          <option style="color:#14170f">Auditoría o revisión en curso</option>
+          <option style="color:#14170f">Devoluciones y compensaciones</option>
+          <option style="color:#14170f">Comercio exterior</option>
+          <option style="color:#14170f">Otra</option>
+        </select>
+      </label>
+      <label style="display:flex;flex-direction:column;gap:8px;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:#a9b5a3">Su asunto
+        <textarea rows="4" placeholder="Etapa, autoridad involucrada y plazos, si los hay" style="background:transparent;border:0;border-bottom:1px solid rgba(242,241,234,.3);padding:11px 0;color:#fff;font-family:Archivo,sans-serif;font-size:15px;letter-spacing:0;text-transform:none;resize:vertical;transition:border-color .3s ease"></textarea>
+      </label>
+      <button type="submit" style="margin-top:8px;align-self:flex-start;display:inline-flex;align-items:center;gap:10px;padding:15px 26px;background:#f7f6f2;color:#01390d;border:0;border-radius:2px;font-family:Archivo,sans-serif;font-size:14.5px;font-weight:500;cursor:pointer;transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s ease" style-hover="transform:translateY(-2px);box-shadow:0 14px 30px -12px rgba(0,0,0,.5)">
+        Enviar consulta <span>→</span>
+      </button>
+      <span style="font-size:12px;color:#93a08c;line-height:1.5">El envío de este formulario no crea una relación abogado–cliente. Sus datos se tratan conforme al aviso de privacidad.</span>
+    </form>
+  </div>
+</section>
+
+<footer style="background:#0b1108;color:#9fa89a">
+  <div style="max-width:1240px;margin:0 auto;padding:54px 32px 30px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:40px">
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <span style="width:52px;height:52px;background:#e9e7df;mask:url(assets/ea-logo.svg) center/contain no-repeat;opacity:.85"></span>
+      <div style="font-family:'Instrument Serif',serif;font-size:19px;color:#e9e7df">Espinoza Abogados</div>
+      <div style="font-size:12.5px;line-height:1.6">Paolo Espinoza y Asociados, S.C.<br>Ciudad de México</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:11px;font-size:13.5px">
+      <span style="font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:#6d7768;margin-bottom:6px">Navegación</span>
+      <a href="#areas" style="color:#9fa89a" style-hover="color:#fff">Áreas de práctica</a>
+      <a href="#despacho" style="color:#9fa89a" style-hover="color:#fff">El despacho</a>
+      <a href="#equipo" style="color:#9fa89a" style-hover="color:#fff">Socios y equipo</a>
+      <a href="#casos" style="color:#9fa89a" style-hover="color:#fff">Casos y resultados</a>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:11px;font-size:13.5px">
+      <span style="font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:#6d7768;margin-bottom:6px">Contacto</span>
+      <a href="tel:+525554199450" style="color:#9fa89a" style-hover="color:#fff">(55) 5419 9450</a>
+      <a href="mailto:contacto@espinozabogados.com" style="color:#9fa89a" style-hover="color:#fff">contacto@espinozabogados.com</a>
+      <span>Av. Revolución 1225, Piso 4</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:11px;font-size:13.5px">
+      <span style="font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:#6d7768;margin-bottom:6px">Legal</span>
+      <a href="#contacto" style="color:#9fa89a" style-hover="color:#fff">Aviso de privacidad</a>
+      <span style="font-size:12px;line-height:1.6;color:#6d7768">Contenido de esta página con carácter informativo; no constituye asesoría legal.</span>
+    </div>
+  </div>
+  <div style="max-width:1240px;margin:0 auto;padding:18px 32px 40px;border-top:1px solid rgba(200,164,76,.32);font-size:11.5px;color:#6d7768">© 2026 Paolo Espinoza y Asociados, S.C. Todos los derechos reservados.</div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;mostrarNotas&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Revisión&quot;},&quot;animaciones&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Revisión&quot;}}">
+const AREAS = [
+  { folio: "01", titulo: "Consultoría y planeación fiscal",
+    resumen: "Revisamos la estructura actual, medimos el riesgo de cada operación y proponemos alternativas sostenibles dentro del marco legal vigente.",
+    incluye: ["Diagnóstico de la estructura corporativa y sus operaciones", "Opinión escrita con fundamento y grado de riesgo", "Alternativas de implementación y su costo fiscal", "Acompañamiento en la ejecución"],
+    senal: "La operación crece o cambia de giro y nadie ha revisado el efecto fiscal." },
+  { folio: "02", titulo: "Litigio y defensa fiscal",
+    resumen: "Llevamos el asunto desde el primer requerimiento hasta la última instancia, con la estrategia definida antes de contestar.",
+    incluye: ["Recurso de revocación ante el SAT", "Juicio de nulidad ante el TFJA", "Amparo directo e indirecto", "Suspensión del procedimiento de cobro"],
+    senal: "Le notificaron un crédito fiscal y el plazo ya está corriendo." },
+  { folio: "03", titulo: "Auditorías y revisiones",
+    resumen: "Acompañamiento durante visitas domiciliarias, revisiones de gabinete y electrónicas, cuidando cada actuación que quedará en el expediente.",
+    incluye: ["Atención de requerimientos de información", "Control de plazos y actas parciales", "Integración del soporte documental", "Cierre y, si procede, impugnación"],
+    senal: "Recibió una orden de visita o una carta invitación." },
+  { folio: "04", titulo: "Devoluciones y compensaciones",
+    resumen: "Recuperación de saldos a favor con el soporte armado desde el inicio, para que la negativa no se repita.",
+    incluye: ["Revisión de la procedencia del saldo", "Integración del expediente de soporte", "Solicitud y seguimiento ante la autoridad", "Defensa contra negativas o desistimientos"],
+    senal: "Tiene un saldo a favor negado o detenido sin respuesta." },
+  { folio: "05", titulo: "Precios de transferencia",
+    resumen: "Revisión de operaciones entre partes relacionadas y defensa del criterio adoptado frente a la autoridad.",
+    incluye: ["Análisis funcional de las operaciones intercompañía", "Revisión de estudios existentes", "Ajustes y documentación de respaldo", "Defensa del criterio en revisión"],
+    senal: "El grupo opera con partes relacionadas en el extranjero." },
+  { folio: "06", titulo: "Comercio exterior y aduanas",
+    resumen: "Clasificación, programas de fomento y defensa frente a créditos determinados por la autoridad aduanera.",
+    incluye: ["Clasificación arancelaria y criterios aplicables", "IMMEX, PROSEC y otros programas", "Defensa en PAMA", "Regularización de mercancía"],
+    senal: "Le embargaron mercancía o iniciaron un PAMA." },
+  { folio: "07", titulo: "Fiscal internacional",
+    resumen: "Aplicación de tratados, retenciones a residentes en el extranjero y operación de grupos multinacionales en México.",
+    incluye: ["Aplicación de tratados para evitar doble tributación", "Retenciones y tasas aplicables", "Establecimiento permanente", "Repatriación de utilidades"],
+    senal: "Una empresa extranjera empieza a operar o cobrar en México." },
+  { folio: "08", titulo: "Seguridad social y contribuciones locales",
+    resumen: "IMSS, INFONAVIT e impuestos estatales: cumplimiento, dictámenes y defensa de créditos fiscales.",
+    incluye: ["Revisión de la base de cotización", "Dictamen y corrección voluntaria", "Defensa de créditos del IMSS e INFONAVIT", "Impuesto sobre nóminas y contribuciones estatales"],
+    senal: "Le determinaron diferencias por cuotas o nóminas." }
+];
+
+class Component extends DCLogic {
+  state = { area: 0 };
+  componentDidMount() {
+    this.io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        const el = e.target;
+        const d = el.getAttribute("data-rv-i") || 0;
+        setTimeout(() => {
+          el.style.opacity = "1";
+          el.style.transform = "none";
+        }, d * 70);
+        this.io.unobserve(el);
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+
+    if (this.props.animaciones === false) {
+      document.querySelectorAll("[data-rv]").forEach((el) => { el.style.opacity = "1"; el.style.transform = "none"; });
+      document.querySelectorAll("[data-ea-count]").forEach((el) => { el.textContent = el.getAttribute("data-to"); });
+    } else {
+      this.prep();
+      this.counters();
+    }
+    this.nav();
+    this.onScroll = () => {
+      const h = document.querySelector("[data-ea-header]");
+      if (!h) return;
+      const s = window.scrollY > 40;
+      h.style.padding = s ? "0px" : "0px";
+      h.querySelector("div").style.padding = s ? "10px 32px" : "16px 32px";
+      h.style.background = s ? "rgba(247,246,242,0.94)" : "rgba(247,246,242,0.82)";
+      h.style.boxShadow = s ? "0 1px 20px -8px rgba(1,57,13,.28)" : "none";
+    };
+    window.addEventListener("scroll", this.onScroll, { passive: true });
+    if (this.props.animaciones !== false) this.dots();
+  }
+
+  dots() {
+    const c = document.querySelector("[data-ea-dots]");
+    if (!c) return;
+    const ctx = c.getContext("2d");
+    const st = { x: -999, y: -999, t: 0, on: true, vis: true, w: 1, h: 1 };
+    const resize = () => {
+      const r = c.getBoundingClientRect();
+      const dpr = Math.min(2, window.devicePixelRatio || 1);
+      c.width = Math.max(1, r.width * dpr);
+      c.height = Math.max(1, r.height * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      st.w = r.width; st.h = r.height;
+    };
+    resize();
+    this.ro = new ResizeObserver(resize);
+    this.ro.observe(c);
+    const host = c.parentElement;
+    const move = (e) => { const r = c.getBoundingClientRect(); st.x = e.clientX - r.left; st.y = e.clientY - r.top; };
+    const leave = () => { st.x = -999; st.y = -999; };
+    host.addEventListener("mousemove", move);
+    host.addEventListener("mouseleave", leave);
+    this.cleanDots = () => { host.removeEventListener("mousemove", move); host.removeEventListener("mouseleave", leave); st.on = false; };
+    const vis = new IntersectionObserver((es) => { st.vis = es[0].isIntersecting; }, { threshold: 0 });
+    vis.observe(c);
+    const gap = 22, R = 150;
+    const draw = () => {
+      if (!st.on) return;
+      requestAnimationFrame(draw);
+      if (!st.vis) return;
+      st.t += 0.006;
+      ctx.clearRect(0, 0, st.w, st.h);
+      for (let y = gap / 2; y < st.h; y += gap) {
+        for (let x = gap / 2; x < st.w; x += gap) {
+          const dx = x - st.x, dy = y - st.y;
+          const d = Math.sqrt(dx * dx + dy * dy);
+          const near = d < R ? 1 - d / R : 0;
+          const wave = 0.5 + 0.5 * Math.sin(st.t * 2 + x * 0.01 + y * 0.012);
+          const r = 1 + near * near * 2.1 + wave * 0.22;
+          const a = 0.1 + near * near * 0.5 + wave * 0.04;
+          ctx.beginPath();
+          const g = near * near;
+          ctx.fillStyle = "rgba(" + Math.round(242 - 42 * g) + "," + Math.round(241 - 77 * g) + "," + Math.round(234 - 158 * g) + "," + a.toFixed(3) + ")";
+          ctx.arc(x - dx * 0.04 * near, y - dy * 0.04 * near, r, 0, 6.2832);
+          ctx.fill();
+        }
+      }
+    };
+    requestAnimationFrame(draw);
+  }
+
+  nav() {
+    document.querySelectorAll("[data-ea-navlink]").forEach((a) => {
+      if (a.dataset.navReady) return;
+      a.dataset.navReady = "1";
+      const u = document.createElement("span");
+      u.style.cssText = "position:absolute;left:13px;right:13px;bottom:5px;height:1px;background:#c8a44c;transform:scaleX(0);transform-origin:left;transition:transform .45s cubic-bezier(.22,1,.36,1)";
+      a.appendChild(u);
+      a.addEventListener("mouseenter", () => { u.style.transformOrigin = "left"; u.style.transform = "scaleX(1)"; });
+      a.addEventListener("mouseleave", () => { u.style.transformOrigin = "right"; u.style.transform = "scaleX(0)"; });
+    });
+  }
+
+  prep() {
+    const nodes = Array.from(document.querySelectorAll("[data-rv]"));
+    nodes.forEach((el) => {
+      if (el.dataset.rvReady) return;
+      el.dataset.rvReady = "1";
+      const sibs = Array.from(el.parentElement ? el.parentElement.children : []).filter((n) => n.hasAttribute && n.hasAttribute("data-rv"));
+      el.setAttribute("data-rv-i", String(Math.min(sibs.indexOf(el), 7)));
+      el.style.opacity = "0";
+      el.style.transform = "translateY(20px)";
+      el.style.transition = "opacity .85s cubic-bezier(.22,1,.36,1), transform .85s cubic-bezier(.22,1,.36,1)";
+      this.io.observe(el);
+    });
+  }
+
+  counters() {
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        const el = e.target;
+        const to = parseInt(el.getAttribute("data-to"), 10) || 0;
+        const t0 = performance.now();
+        const dur = 1400;
+        const tick = (t) => {
+          const p = Math.min(1, (t - t0) / dur);
+          const eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = String(Math.round(to * eased));
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+        obs.unobserve(el);
+      });
+    }, { threshold: 0.6 });
+    document.querySelectorAll("[data-ea-count]").forEach((el) => obs.observe(el));
+  }
+
+  componentDidUpdate(prev, prevState) {
+    this.nav();
+
+    if (this.props.animaciones === false) {
+      document.querySelectorAll("[data-rv]").forEach((el) => { el.style.opacity = "1"; el.style.transform = "none"; });
+    } else { this.prep(); }
+  }
+
+  componentWillUnmount() {
+    if (this.io) this.io.disconnect();
+    if (this.ro) this.ro.disconnect();
+    if (this.cleanDots) this.cleanDots();
+    window.removeEventListener("scroll", this.onScroll);
+  }
+
+  renderVals() {
+    const act = this.state.area;
+    const areas = AREAS.map((a, i) => {
+      const on = i === act;
+      return {
+        folio: a.folio,
+        titulo: a.titulo,
+        rowStyle: "display:grid;grid-template-columns:30px 1fr 18px;gap:14px;align-items:center;padding:19px 22px 19px 18px;cursor:pointer;border-top:" +
+          (i === 0 ? "0" : "1px solid rgba(1,57,13,.13)") +
+          ";background:" + (on ? "#eceae2" : "transparent") +
+          ";color:" + (on ? "#01390d" : "#3f4739") +
+          ";box-shadow:inset " + (on ? "3px" : "0px") + " 0 0 #c8a44c" +
+          ";transition:background .4s cubic-bezier(.22,1,.36,1),color .3s ease,box-shadow .4s cubic-bezier(.22,1,.36,1),padding-left .4s cubic-bezier(.22,1,.36,1)" +
+          ";padding-left:" + (on ? "26px" : "18px"),
+        markStyle: "width:16px;height:16px;background:#8a6d1f;mask:url(assets/ea-logo.svg) center/contain no-repeat;opacity:" +
+          (on ? "1" : "0") + ";transform:" + (on ? "none" : "rotate(-25deg) scale(.7)") +
+          ";transition:opacity .45s ease,transform .5s cubic-bezier(.22,1,.36,1)",
+        select: () => {
+          if (this.state.area === i) return;
+          this.setState({ area: i }, () => {
+            const b = document.querySelector("[data-ea-panel-body]");
+            if (b && b.animate) b.animate([{ opacity: 0, transform: "translateY(14px)" }, { opacity: 1, transform: "none" }], { duration: 550, easing: "cubic-bezier(.22,1,.36,1)" });
+          });
+        }
+      };
+    });
+    return {
+      areas,
+      activa: AREAS[act],
+      onSubmit: (e) => {
+        e.preventDefault();
+        const b = e.target.querySelector("button[type=submit]");
+        if (b) { b.textContent = "Consulta enviada ✓"; b.style.background = "#dfc486"; }
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

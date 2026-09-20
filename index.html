@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Espinoza Abogados — Propuestas de Rediseño</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    background: #0f0f10;
+    color: #eaeaea;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+  }
+  .wrap { max-width: 720px; width: 100%; text-align: center; }
+  h1 { font-size: 1.75rem; font-weight: 600; margin-bottom: 8px; }
+  p.sub { color: #999; margin-bottom: 40px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
+  a.card {
+    display: block;
+    padding: 32px 16px;
+    background: #1a1a1c;
+    border: 1px solid #2a2a2c;
+    border-radius: 12px;
+    color: #eaeaea;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: border-color .15s, background .15s;
+  }
+  a.card:hover { border-color: #555; background: #202022; }
+  a.card span { display: block; font-size: .85rem; color: #999; font-weight: 400; margin-top: 6px; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Espinoza Abogados</h1>
+    <p class="sub">Propuestas de rediseño — elige una versión</p>
+    <div class="grid">
+      <a class="card" href="./v1/">Versión 1<span>Original</span></a>
+      <a class="card" href="./v2/">Versión 2<span>Alternativa</span></a>
+      <a class="card" href="./v3/">Versión 3<span>Alternativa</span></a>
+    </div>
+  </div>
+</body>
+</html>
