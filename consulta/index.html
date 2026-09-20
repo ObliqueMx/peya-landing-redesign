@@ -1,0 +1,579 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Espinoza Abogados — Consulta</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+html{scroll-behavior:smooth}
+body{margin:0;background:#f6f4ee;color:#121a13;font-family:'Work Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#01390d;text-decoration:none}
+a:hover{color:#8a6a2a}
+button{font-family:'Work Sans',system-ui,sans-serif}
+::selection{background:#01390d;color:#f6f4ee}
+.ea-arrow{display:inline-block;transition:transform .4s cubic-bezier(.22,1,.36,1)}
+a:hover .ea-arrow,button:hover .ea-arrow{transform:translateX(5px)}
+.ea-row:hover .ea-rowarrow{opacity:1 !important;transform:none !important}
+.ea-row:hover .ea-rowname{transform:translateX(8px)}
+.ea-rowname{transition:transform .45s cubic-bezier(.22,1,.36,1);display:block}
+.ea-chips::-webkit-scrollbar{display:none}
+@media (max-width:1000px){
+  [data-ea-grid12]{grid-template-columns:1fr !important;gap:32px !important}
+  [data-ea-grid12]>*{grid-column:1/-1 !important;min-width:0 !important}
+  [data-ea-triage]{grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr)) !important;gap:26px 28px !important}
+  [data-ea-triage]>*{grid-column:auto !important;min-width:0 !important}
+  [data-ea-panel]{min-height:0 !important}
+}
+@media (max-width:760px){
+  [data-ea-caserow]{grid-template-columns:1fr !important;gap:12px !important}
+  [data-ea-socio]{grid-template-columns:52px 1fr !important;gap:18px !important}
+  [data-ea-socio] .ea-rowarrow{display:none !important}
+}
+@keyframes ea-pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.7);opacity:.35}}
+</style>
+</helmet>
+
+<div style="{{ rootStyle }}">
+
+
+<header data-ea-header style="position:sticky;top:0;z-index:50;background:rgba(246,244,238,.88);backdrop-filter:blur(14px);border-bottom:1px solid rgba(1,57,13,.12);transition:box-shadow .35s ease">
+  <div data-ea-headin style="max-width:1360px;margin:0 auto;padding:18px clamp(24px,5vw,72px);display:flex;align-items:center;gap:24px;transition:padding .35s cubic-bezier(.22,1,.36,1)">
+    <a href="#inicio" style="display:flex;align-items:center;gap:12px;flex:none">
+      <span style="width:36px;height:36px;flex:none;background:#01390d;mask:url(assets/ea-logo.svg) center/contain no-repeat;transition:transform .7s cubic-bezier(.22,1,.36,1)" style-hover="transform:rotate(18deg)"></span>
+      <span style="display:flex;flex-direction:column;line-height:1">
+        <span style="font-family:Newsreader,serif;font-size:21px;color:#01390d;font-weight:500">Espinoza Abogados</span>
+        <span style="font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#5b625b;margin-top:5px;font-weight:500">Paolo Espinoza y Asociados</span>
+      </span>
+    </a>
+    <nav style="{{ navStyle }}">
+      <a data-ea-navlink href="#areas" style="position:relative;padding:9px 12px;font-size:13.5px;color:#3a463d;transition:color .25s ease" style-hover="color:#01390d">Ãreas</a>
+      <a data-ea-navlink href="#metodo" style="position:relative;padding:9px 12px;font-size:13.5px;color:#3a463d;transition:color .25s ease" style-hover="color:#01390d">MÃ©todo</a>
+      <a data-ea-navlink href="#equipo" style="position:relative;padding:9px 12px;font-size:13.5px;color:#3a463d;transition:color .25s ease" style-hover="color:#01390d">Socios</a>
+      <a data-ea-navlink href="#casos" style="position:relative;padding:9px 12px;font-size:13.5px;color:#3a463d;transition:color .25s ease" style-hover="color:#01390d">Casos</a>
+      <a href="#contacto" style="margin-left:16px;display:inline-flex;align-items:center;gap:9px;padding:12px 18px;border-radius:var(--r);background:#01390d;color:#f6f4ee;font-size:13px;font-weight:500;transition:background .3s ease" style-hover="background:#8a6a2a;color:#fff">Agendar llamada <span class="ea-arrow">â†’</span></a>
+    </nav>
+    <button onClick="{{ toggleMenu }}" aria-label="MenÃº" style="{{ burgerStyle }}">
+      <span style="display:block;width:20px;height:1.5px;background:#01390d"></span>
+      <span style="display:block;width:20px;height:1.5px;background:#01390d"></span>
+    </button>
+  </div>
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <nav style="display:flex;flex-direction:column;padding:6px clamp(24px,5vw,72px) 22px;border-top:1px solid rgba(1,57,13,.1);background:#f6f4ee">
+      <a onClick="{{ closeMenu }}" href="#areas" style="padding:14px 0;font-family:Newsreader,serif;font-size:22px;border-bottom:1px solid rgba(1,57,13,.1)">Ãreas de prÃ¡ctica</a>
+      <a onClick="{{ closeMenu }}" href="#metodo" style="padding:14px 0;font-family:Newsreader,serif;font-size:22px;border-bottom:1px solid rgba(1,57,13,.1)">MÃ©todo</a>
+      <a onClick="{{ closeMenu }}" href="#equipo" style="padding:14px 0;font-family:Newsreader,serif;font-size:22px;border-bottom:1px solid rgba(1,57,13,.1)">Socios</a>
+      <a onClick="{{ closeMenu }}" href="#casos" style="padding:14px 0;font-family:Newsreader,serif;font-size:22px;border-bottom:1px solid rgba(1,57,13,.1)">Casos</a>
+      <a onClick="{{ closeMenu }}" href="#contacto" style="margin-top:16px;display:inline-flex;justify-content:center;padding:15px 18px;border-radius:var(--r);background:#01390d;color:#f6f4ee;font-size:14px;font-weight:500">Agendar llamada â†’</a>
+    </nav>
+  </sc-if>
+</header>
+
+<section id="inicio" data-screen-label="Inicio" style="position:relative;background:#f6f4ee;overflow:hidden">
+  <div style="position:absolute;top:-160px;right:-200px;width:760px;height:760px;background:#01390d;opacity:.045;mask:url(assets/ea-logo.svg) center/contain no-repeat;pointer-events:none"></div>
+  <div style="position:relative;max-width:1360px;margin:0 auto;padding:clamp(72px,10vw,150px) clamp(24px,5vw,72px) clamp(64px,7vw,100px)">
+    <div data-rv style="display:flex;align-items:center;gap:12px;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:#5b625b;margin-bottom:40px;font-weight:500;flex-wrap:wrap">
+      <span style="width:7px;height:7px;border-radius:50%;background:#b08d4a"></span>
+      Despacho fiscal <span style="color:#b08d4a">Â·</span> Ciudad de MÃ©xico <span style="color:#b08d4a">Â·</span> CancÃºn
+    </div>
+    <h1 style="font-family:Newsreader,serif;font-weight:400;font-size:clamp(46px,7vw,112px);line-height:.98;letter-spacing:-.025em;margin:0 0 48px;color:#01390d;max-width:14ch">
+      <span data-rv style="display:block">PredicciÃ³n y prevenciÃ³n</span>
+      <span data-rv style="display:block"><em style="font-style:italic;font-weight:300;color:#8a6a2a">fiscal</em> para su empresa.</span>
+    </h1>
+    <div data-ea-grid12 style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:32px;align-items:end">
+      <p data-rv style="grid-column:1/span 12;font-size:clamp(17px,1.4vw,20px);line-height:1.6;color:#3a463d;margin:0;max-width:56ch;text-wrap:pretty">PredicciÃ³n y prevenciÃ³n fiscal para medianas empresas, grupos corporativos y filiales de grupos extranjeros en MÃ©xico. Anticipamos dÃ³nde va a mirar la autoridad y, cuando ya llegÃ³, litigamos. Cada asunto lo lleva un socio de principio a fin.</p>
+      <div data-rv style="grid-column:1/span 12;display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:8px">
+        <a href="#contacto" style="display:inline-flex;align-items:center;gap:10px;padding:17px 28px;background:#01390d;color:#f6f4ee;border-radius:var(--r);font-size:15px;font-weight:500;transition:background .3s ease" style-hover="background:#8a6a2a;color:#fff">Agendar una llamada <span class="ea-arrow">â†’</span></a>
+        <a href="#areas" style="display:inline-flex;align-items:center;gap:10px;padding:17px 22px;border:1px solid rgba(1,57,13,.28);border-radius:var(--r);color:#01390d;font-size:15px;transition:border-color .3s ease,background .3s ease" style-hover="border-color:#01390d;background:#eeebe3;color:#01390d">Ver Ã¡reas de prÃ¡ctica <span class="ea-arrow">â†“</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Triage" style="background:#01390d;color:#f6f4ee;position:relative;overflow:hidden">
+  <div style="max-width:1360px;margin:0 auto;padding:clamp(48px,5vw,72px) clamp(24px,5vw,72px)">
+    <div data-rv style="display:flex;align-items:baseline;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:26px">
+      <div style="font-family:Newsreader,serif;font-size:clamp(24px,2.2vw,32px);line-height:1.1;color:#fff">Â¿En quÃ© situaciÃ³n estÃ¡ la empresa?</div>
+      <div style="font-family:ui-monospace,Menlo,monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:#b9b5a8">OrientaciÃ³n inicial Â· elija una</div>
+    </div>
+    <div data-rv style="position:relative;margin-bottom:38px">
+      <div data-ea-chips class="ea-chips" onScroll="{{ onChipsScroll }}" style="display:flex;gap:8px;overflow-x:auto;padding-bottom:14px;scrollbar-width:none">
+        <sc-for list="{{ triage }}" as="t" hint-placeholder-count="8">
+          <button onClick="{{ t.select }}" style="{{ t.btnStyle }}"><span style="{{ t.dotStyle }}"></span><span>{{ t.label }}</span></button>
+        </sc-for>
+      </div>
+      <div style="{{ chipsFadeStyle }}"></div>
+      <button onClick="{{ chipsNext }}" aria-label="MÃ¡s situaciones" style="{{ chipsNextStyle }}"><span class="ea-arrow">â†’</span></button>
+      <div style="position:absolute;left:0;right:0;bottom:0;height:1px;background:rgba(246,244,238,.14)"><div data-ea-chipbar style="height:100%;width:30%;background:#b08d4a;transform:translateX(0);transition:transform .2s ease,width .2s ease"></div></div>
+    </div>
+    <div data-rv data-ea-triage style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:32px 40px;border-top:1px solid rgba(246,244,238,.18);padding-top:34px">
+      <div style="grid-column:span 2;min-width:150px">
+        <div style="font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#b9b5a8;margin-bottom:12px">Urgencia</div>
+        <div style="display:flex;gap:5px;align-items:center;margin-bottom:10px"><span data-ea-seg style="{{ seg1 }}"></span><span data-ea-seg style="{{ seg2 }}"></span><span data-ea-seg style="{{ seg3 }}"></span></div>
+        <div style="font-size:15px;color:#fff">{{ activo.urgencia }}</div>
+      </div>
+      <div style="grid-column:span 3;min-width:200px">
+        <div style="font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#b9b5a8;margin-bottom:10px">Plazo que corre</div>
+        <div style="font-family:Newsreader,serif;font-size:clamp(30px,2.6vw,40px);line-height:1;color:#fff"><span data-ea-plazo-n>{{ activo.plazoN }}</span>{{ activo.plazoT }}</div>
+        <div style="font-size:12.5px;color:#b9b5a8;margin-top:8px;line-height:1.5">{{ activo.fuente }}</div>
+      </div>
+      <div style="grid-column:span 4;min-width:240px">
+        <div style="font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#b9b5a8;margin-bottom:10px">Lo primero que hacemos</div>
+        <div style="font-size:15.5px;line-height:1.55;color:#f6f4ee">{{ activo.paso }}</div>
+      </div>
+      <div style="grid-column:span 3;min-width:220px;display:flex;flex-direction:column;justify-content:space-between;gap:18px">
+        <div><div style="font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#b9b5a8;margin-bottom:10px">Ãrea responsable</div><div style="font-family:Newsreader,serif;font-size:20px;line-height:1.2;color:#fff">{{ activo.area }}</div></div>
+        <a href="#contacto" onClick="{{ prefill }}" style="align-self:flex-start;display:inline-flex;align-items:center;gap:9px;padding:13px 18px;border-radius:var(--r);background:#b08d4a;color:#fff;font-size:13.5px;font-weight:500;transition:background .3s ease" style-hover="background:#c4a25e;color:#fff">Consultar esta situaciÃ³n <span class="ea-arrow">â†’</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="areas" data-screen-label="Ãreas" style="background:#eeebe3;border-top:1px solid rgba(1,57,13,.1)">
+  <div style="max-width:1360px;margin:0 auto;padding:clamp(80px,10vw,150px) clamp(24px,5vw,72px)">
+    <div data-ea-grid12 style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:32px 40px;align-items:end;margin-bottom:56px">
+      <div style="grid-column:1/span 7">
+        <div data-rv style="font-family:ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#5b625b;margin-bottom:22px">01 â€” Ãreas de prÃ¡ctica</div>
+        <h2 data-rv style="font-family:Newsreader,serif;font-weight:400;font-size:clamp(34px,4vw,60px);line-height:1.02;letter-spacing:-.02em;margin:0;color:#01390d;max-width:18ch">Una sola materia, <em style="font-style:italic;font-weight:300;color:#8a6a2a">abierta por expediente</em></h2>
+      </div>
+      <p data-rv style="grid-column:9/span 4;min-width:240px;font-size:15px;line-height:1.66;color:#3a463d;margin:0 0 6px">Cada lÃ­nea abre el detalle: quÃ© revisamos, quÃ© incluye el trabajo y la seÃ±al que normalmente lo detona.</p>
+    </div>
+    <div data-ea-grid12 style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:40px 56px">
+      <div data-rv style="grid-column:1/span 5;min-width:260px;border-top:1px solid rgba(1,57,13,.2)">
+        <sc-for list="{{ areas }}" as="a" hint-placeholder-count="8">
+          <div onClick="{{ a.select }}" onMouseEnter="{{ a.hover }}" onMouseLeave="{{ a.unhover }}" style="{{ a.rowStyle }}">
+            <span style="font-family:ui-monospace,Menlo,monospace;font-size:10.5px;letter-spacing:.06em;opacity:.55">{{ a.folio }}</span>
+            <span style="font-family:Newsreader,serif;font-size:clamp(20px,1.6vw,24px);line-height:1.2">{{ a.titulo }}</span>
+            <span style="{{ a.arrowStyle }}">â†’</span>
+          </div>
+        </sc-for>
+      </div>
+      <div data-ea-panel style="grid-column:6/span 7;min-width:280px;position:relative;background:#01390d;color:#f6f4ee;overflow:hidden;min-height:460px;border-radius:var(--r2)">
+        <div style="position:absolute;top:-70px;right:-90px;width:340px;height:340px;background:#fff;opacity:.05;mask:url(assets/ea-logo.svg) center/contain no-repeat"></div>
+        <div data-ea-panel-body style="position:relative;padding:clamp(28px,3vw,48px);display:flex;flex-direction:column;height:100%;box-sizing:border-box">
+          <div style="font-family:ui-monospace,Menlo,monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:#b9b5a8;margin-bottom:20px">Folio {{ activa.folio }} Â· materia fiscal</div>
+          <h3 style="font-family:Newsreader,serif;font-weight:400;font-size:clamp(28px,2.8vw,42px);line-height:1.06;margin:0 0 16px;color:#fff;max-width:24ch">{{ activa.titulo }}</h3>
+          <p style="font-size:16px;line-height:1.62;color:#d6d3c8;margin:0 0 30px;max-width:54ch">{{ activa.resumen }}</p>
+          <div style="font-family:ui-monospace,Menlo,monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:#b9b5a8;margin-bottom:4px">QuÃ© incluye</div>
+          <sc-for list="{{ activa.incluye }}" as="it" hint-placeholder-count="4">
+            <div style="display:grid;grid-template-columns:14px 1fr;gap:12px;align-items:baseline;padding:11px 0;border-top:1px solid rgba(246,244,238,.16);font-size:15px;line-height:1.5;color:#f6f4ee"><span style="color:#b08d4a">â€”</span><span>{{ it }}</span></div>
+          </sc-for>
+          <div style="margin-top:auto;padding-top:30px;display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap">
+            <div style="max-width:40ch"><div style="font-family:ui-monospace,Menlo,monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:#b9b5a8;margin-bottom:6px">SeÃ±al tÃ­pica</div><div style="font-size:14.5px;line-height:1.55;color:#d6d3c8">{{ activa.senal }}</div></div>
+            <a href="#contacto" onClick="{{ prefillArea }}" style="display:inline-flex;align-items:center;gap:9px;padding:13px 18px;border-radius:var(--r);background:#b08d4a;color:#fff;font-size:13.5px;font-weight:500;transition:background .3s ease" style-hover="background:#c4a25e;color:#fff">Consultar este tema <span class="ea-arrow">â†’</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="metodo" data-screen-label="MÃ©todo" style="background:#f6f4ee">
+  <div style="max-width:1360px;margin:0 auto;padding:clamp(80px,10vw,150px) clamp(24px,5vw,72px)">
+    <div data-ea-grid12 style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:32px 40px;align-items:end;margin-bottom:64px">
+      <div style="grid-column:1/span 6">
+        <div data-rv style="font-family:ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#5b625b;margin-bottom:22px">02 â€” MÃ©todo</div>
+        <h2 data-rv style="font-family:Newsreader,serif;font-weight:400;font-size:clamp(34px,4vw,60px);line-height:1.02;letter-spacing:-.02em;margin:0;color:#01390d;max-width:16ch">CÃ³mo trabajamos un asunto fiscal</h2>
+      </div>
+      <p data-rv style="grid-column:8/span 5;min-width:260px;font-size:16px;line-height:1.66;color:#3a463d;margin:0">No entregamos un escrito y esperamos. La estrategia completa se define antes de contestar el primer requerimiento, y la direcciÃ³n de finanzas sabe en quÃ© etapa estÃ¡ el expediente en todo momento. Un socio responde por cada caso, ante el consejo si hace falta.</p>
+    </div>
+    <div style="position:relative">
+      <div style="position:absolute;left:0;right:0;top:5px;height:1px;background:rgba(1,57,13,.16)"></div>
+      <div data-rv="line" style="position:absolute;left:0;right:0;top:5px;height:1px;background:#b08d4a;transform-origin:left"></div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:40px">
+        <div data-rv style="padding-top:32px;position:relative"><span style="position:absolute;top:0;left:0;width:11px;height:11px;border-radius:50%;background:#b08d4a"></span><div style="font-family:Newsreader,serif;font-size:15px;color:#8a6a2a;margin-bottom:12px">I</div><div style="font-family:Newsreader,serif;font-size:22px;color:#01390d;margin-bottom:10px">Lectura del expediente</div><div style="font-size:14.5px;line-height:1.6;color:#3a463d">Antecedentes, plazos y actuaciones previas antes de opinar. Sin diagnÃ³stico no hay estrategia.</div></div>
+        <div data-rv style="padding-top:32px;position:relative"><span style="position:absolute;top:0;left:0;width:11px;height:11px;border-radius:50%;background:#b08d4a"></span><div style="font-family:Newsreader,serif;font-size:15px;color:#8a6a2a;margin-bottom:12px">II</div><div style="font-family:Newsreader,serif;font-size:22px;color:#01390d;margin-bottom:10px">Escenarios y costo por escrito</div><div style="font-size:14.5px;line-height:1.6;color:#3a463d">Las vÃ­as posibles, el riesgo de cada una y el honorario correspondiente, antes de empezar.</div></div>
+        <div data-rv style="padding-top:32px;position:relative"><span style="position:absolute;top:0;left:0;width:11px;height:11px;border-radius:50%;background:#b08d4a"></span><div style="font-family:Newsreader,serif;font-size:15px;color:#8a6a2a;margin-bottom:12px">III</div><div style="font-family:Newsreader,serif;font-size:22px;color:#01390d;margin-bottom:10px">Un socio al frente</div><div style="font-size:14.5px;line-height:1.6;color:#3a463d">El socio que estudiÃ³ el caso es el que lo firma, lo litiga y lo explica ante la direcciÃ³n.</div></div>
+        <div data-rv style="padding-top:32px;position:relative"><span style="position:absolute;top:0;left:0;width:11px;height:11px;border-radius:50%;background:#b08d4a"></span><div style="font-family:Newsreader,serif;font-size:15px;color:#8a6a2a;margin-bottom:12px">IV</div><div style="font-family:Newsreader,serif;font-size:22px;color:#01390d;margin-bottom:10px">Reporte y cierre</div><div style="font-size:14.5px;line-height:1.6;color:#3a463d">Informe de cada etapa y recomendaciones para que el asunto no se repita.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="equipo" data-screen-label="Socios" style="background:#eeebe3;border-top:1px solid rgba(1,57,13,.1)">
+  <div data-ea-grid12 style="max-width:1360px;margin:0 auto;padding:clamp(80px,10vw,150px) clamp(24px,5vw,72px);display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:40px 56px;align-items:start">
+    <div style="grid-column:1/span 5;min-width:240px">
+      <div data-rv style="font-family:ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#5b625b;margin-bottom:22px">03 â€” Socios</div>
+      <h2 data-rv style="font-family:Newsreader,serif;font-weight:400;font-size:clamp(34px,4vw,60px);line-height:1.02;letter-spacing:-.02em;margin:0 0 22px;color:#01390d;max-width:14ch">QuiÃ©n va a llevar el asunto de su empresa</h2>
+      <p data-rv style="font-size:16px;line-height:1.64;color:#3a463d;margin:0 0 32px;max-width:40ch">Cuatro socios, cada uno responsable de su propia lÃ­nea de prÃ¡ctica. El socio que firma es el que se sienta con su equipo de finanzas.</p>
+      <sc-if value="{{ mostrarFotos }}" hint-placeholder-val="{{ true }}">
+        <div data-rv style="aspect-ratio:4/3;max-width:460px;border-radius:var(--r2);border:1px dashed rgba(1,57,13,.35);background:repeating-linear-gradient(135deg,rgba(1,57,13,.05) 0 8px,transparent 8px 16px);display:flex;align-items:flex-end;padding:14px"><span style="font-family:ui-monospace,Menlo,monospace;font-size:10px;letter-spacing:.06em;color:#01390d;background:#f6f4ee;padding:4px 7px">fotografÃ­a: socios en la oficina</span></div>
+      </sc-if>
+    </div>
+    <div data-rv style="grid-column:6/span 7;min-width:280px;display:flex;flex-direction:column;border-top:1px solid rgba(1,57,13,.2)">
+      <a data-ea-socio class="ea-row" href="#linkedin-socio-1" style="display:grid;grid-template-columns:64px 1fr auto;gap:24px;align-items:center;padding:22px 0;border-bottom:1px solid rgba(1,57,13,.14);color:#121a13">
+        <span style="width:64px;height:64px;border-radius:50%;border:1px dashed rgba(1,57,13,.35);background:repeating-linear-gradient(135deg,rgba(1,57,13,.05) 0 6px,transparent 6px 12px)"></span>
+        <span class="ea-rowname"><span style="display:block;font-family:Newsreader,serif;font-size:clamp(22px,1.8vw,26px);color:#01390d;line-height:1.15">Paolo Espinoza</span><span style="display:block;font-size:13.5px;color:#5b625b;margin-top:5px">Socio director Â· Litigio fiscal</span></span>
+        <span class="ea-rowarrow" style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#8a6a2a;opacity:0;transform:translateX(-8px);transition:opacity .35s ease,transform .45s cubic-bezier(.22,1,.36,1)">LinkedIn â†’</span>
+      </a>
+      <a data-ea-socio class="ea-row" href="#linkedin-socio-2" style="display:grid;grid-template-columns:64px 1fr auto;gap:24px;align-items:center;padding:22px 0;border-bottom:1px solid rgba(1,57,13,.14);color:#121a13">
+        <span style="width:64px;height:64px;border-radius:50%;border:1px dashed rgba(1,57,13,.35);background:repeating-linear-gradient(135deg,rgba(1,57,13,.05) 0 6px,transparent 6px 12px)"></span>
+        <span class="ea-rowname"><span style="display:block;font-family:Newsreader,serif;font-size:clamp(22px,1.8vw,26px);color:#01390d;line-height:1.15">Nombre del socio</span><span style="display:block;font-size:13.5px;color:#5b625b;margin-top:5px">Socio Â· ConsultorÃ­a y cumplimiento</span></span>
+        <span class="ea-rowarrow" style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#8a6a2a;opacity:0;transform:translateX(-8px);transition:opacity .35s ease,transform .45s cubic-bezier(.22,1,.36,1)">LinkedIn â†’</span>
+      </a>
+      <a data-ea-socio class="ea-row" href="#linkedin-socio-3" style="display:grid;grid-template-columns:64px 1fr auto;gap:24px;align-items:center;padding:22px 0;border-bottom:1px solid rgba(1,57,13,.14);color:#121a13">
+        <span style="width:64px;height:64px;border-radius:50%;border:1px dashed rgba(1,57,13,.35);background:repeating-linear-gradient(135deg,rgba(1,57,13,.05) 0 6px,transparent 6px 12px)"></span>
+        <span class="ea-rowname"><span style="display:block;font-family:Newsreader,serif;font-size:clamp(22px,1.8vw,26px);color:#01390d;line-height:1.15">Nombre del socio</span><span style="display:block;font-size:13.5px;color:#5b625b;margin-top:5px">Socio Â· Comercio exterior Â· Oficina CancÃºn</span></span>
+        <span class="ea-rowarrow" style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#8a6a2a;opacity:0;transform:translateX(-8px);transition:opacity .35s ease,transform .45s cubic-bezier(.22,1,.36,1)">LinkedIn â†’</span>
+      </a>
+      <a data-ea-socio class="ea-row" href="#linkedin-socio-4" style="display:grid;grid-template-columns:64px 1fr auto;gap:24px;align-items:center;padding:22px 0;border-bottom:1px solid rgba(1,57,13,.14);color:#121a13">
+        <span style="width:64px;height:64px;border-radius:50%;border:1px dashed rgba(1,57,13,.35);background:repeating-linear-gradient(135deg,rgba(1,57,13,.05) 0 6px,transparent 6px 12px)"></span>
+        <span class="ea-rowname"><span style="display:block;font-family:Newsreader,serif;font-size:clamp(22px,1.8vw,26px);color:#01390d;line-height:1.15">Nombre de la socia</span><span style="display:block;font-size:13.5px;color:#5b625b;margin-top:5px">Socia Â· Precios de transferencia</span></span>
+        <span class="ea-rowarrow" style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#8a6a2a;opacity:0;transform:translateX(-8px);transition:opacity .35s ease,transform .45s cubic-bezier(.22,1,.36,1)">LinkedIn â†’</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="casos" data-screen-label="Casos" style="background:#f6f4ee">
+  <div style="max-width:1360px;margin:0 auto;padding:clamp(80px,10vw,150px) clamp(24px,5vw,72px)">
+    <div data-ea-grid12 style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:32px 40px;align-items:end;margin-bottom:48px">
+      <div style="grid-column:1/span 6">
+        <div data-rv style="font-family:ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#5b625b;margin-bottom:22px">04 â€” Casos</div>
+        <h2 data-rv style="font-family:Newsreader,serif;font-weight:400;font-size:clamp(34px,4vw,60px);line-height:1.02;letter-spacing:-.02em;margin:0;color:#01390d">Asuntos representativos</h2>
+      </div>
+      <p data-rv style="grid-column:9/span 4;min-width:240px;font-size:14.5px;line-height:1.66;color:#3a463d;margin:0">Casos anonimizados por confidencialidad. Ejemplos de estructura: montos y materias por validar.</p>
+    </div>
+    <div data-rv style="border-top:1px solid rgba(1,57,13,.2)">
+      <div data-ea-caserow class="ea-row" style="display:grid;grid-template-columns:minmax(160px,3fr) 7fr 2fr;gap:24px 48px;padding:32px 0;border-bottom:1px solid rgba(1,57,13,.14);align-items:start">
+        <div class="ea-rowname"><div style="font-family:Newsreader,serif;font-size:clamp(36px,3.6vw,52px);line-height:1;color:#01390d">$ 42 M</div><div style="font-size:12.5px;color:#5b625b;margin-top:10px">crÃ©dito declarado nulo</div></div>
+        <div><div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#8a6a2a;margin-bottom:10px;font-weight:500">Juicio de nulidad Â· TFJA</div><p style="font-size:16px;line-height:1.6;color:#121a13;margin:0;max-width:64ch">CrÃ©dito fiscal a una manufacturera por operaciones con un proveedor listado en 69-B. Se acreditÃ³ la materialidad con el expediente de entrega y capacidad del proveedor; la resoluciÃ³n fue declarada nula.</p></div>
+        <span class="ea-rowarrow" style="justify-self:end;font-family:ui-monospace,Menlo,monospace;font-size:10.5px;color:#5b625b;opacity:0;transform:translateX(-8px);transition:opacity .35s ease,transform .45s cubic-bezier(.22,1,.36,1)">2024</span>
+      </div>
+      <div data-ea-caserow class="ea-row" style="display:grid;grid-template-columns:minmax(160px,3fr) 7fr 2fr;gap:24px 48px;padding:32px 0;border-bottom:1px solid rgba(1,57,13,.14);align-items:start">
+        <div class="ea-rowname"><div style="font-family:Newsreader,serif;font-size:clamp(36px,3.6vw,52px);line-height:1;color:#01390d">11 meses</div><div style="font-size:12.5px;color:#5b625b;margin-top:10px">de IVA detenido, recuperado</div></div>
+        <div><div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#8a6a2a;margin-bottom:10px;font-weight:500">DevoluciÃ³n de saldo a favor</div><p style="font-size:16px;line-height:1.6;color:#121a13;margin:0;max-width:64ch">IVA a favor negado en dos ocasiones a un grupo de servicios, recuperado tras integrar el soporte documental de cada operaciÃ³n y recurrir la negativa.</p></div>
+        <span class="ea-rowarrow" style="justify-self:end;font-family:ui-monospace,Menlo,monospace;font-size:10.5px;color:#5b625b;opacity:0;transform:translateX(-8px);transition:opacity .35s ease,transform .45s cubic-bezier(.22,1,.36,1)">2025</span>
+      </div>
+      <div data-ea-caserow class="ea-row" style="display:grid;grid-template-columns:minmax(160px,3fr) 7fr 2fr;gap:24px 48px;padding:32px 0;border-bottom:1px solid rgba(1,57,13,.14);align-items:start">
+        <div class="ea-rowname"><div style="font-family:Newsreader,serif;font-size:clamp(36px,3.6vw,52px);line-height:1;color:#01390d">0 sanciÃ³n</div><div style="font-size:12.5px;color:#5b625b;margin-top:10px">sin crÃ©dito ni multa</div></div>
+        <div><div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#8a6a2a;margin-bottom:10px;font-weight:500">Filial extranjera Â· Tratado</div><p style="font-size:16px;line-height:1.6;color:#121a13;margin:0;max-width:64ch">RevisiÃ³n de retenciones a residentes en el extranjero concluida sin crÃ©dito determinado ni multa para la filial mexicana.</p></div>
+        <span class="ea-rowarrow" style="justify-self:end;font-family:ui-monospace,Menlo,monospace;font-size:10.5px;color:#5b625b;opacity:0;transform:translateX(-8px);transition:opacity .35s ease,transform .45s cubic-bezier(.22,1,.36,1)">2025</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contacto" data-screen-label="Contacto" style="background:#01390d;color:#f6f4ee;position:relative;overflow:hidden">
+  <div style="position:absolute;left:-200px;bottom:-260px;width:720px;height:720px;background:#fff;opacity:.04;mask:url(assets/ea-logo.svg) center/contain no-repeat;pointer-events:none"></div>
+  <div data-ea-grid12 style="position:relative;max-width:1360px;margin:0 auto;padding:clamp(80px,10vw,150px) clamp(24px,5vw,72px);display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:48px 56px;align-items:start">
+    <div style="grid-column:1/span 6;min-width:260px">
+      <div data-rv style="font-family:ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#b9b5a8;margin-bottom:22px">05 â€” Contacto</div>
+      <h2 data-rv style="font-family:Newsreader,serif;font-weight:400;font-size:clamp(34px,4vw,60px);line-height:1.02;letter-spacing:-.02em;margin:0 0 22px;color:#fff;max-width:16ch">Hablemos del expediente de su empresa</h2>
+      <p data-rv style="font-size:16.5px;line-height:1.64;color:#d6d3c8;margin:0 0 44px;max-width:44ch">Sin formularios. Agende una llamada de 20 minutos con un socio o escrÃ­banos directamente. Si hay un plazo corriendo, dÃ­galo primero.</p>
+      <div data-rv style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:32px 40px;font-size:15px;line-height:1.6;color:#f6f4ee;margin-bottom:44px">
+        <div><div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#b9b5a8;margin-bottom:10px;font-weight:500">Ciudad de MÃ©xico</div>Av. RevoluciÃ³n 1225, Capital Park San Ãngel<br>Piso 4, Despacho 413, Col. Los Alpes<br>C.P. 01010<br><a href="tel:+525554199450" style="color:#fff;border-bottom:1px solid rgba(246,244,238,.35);display:inline-block;margin-top:8px;transition:border-color .3s ease" style-hover="border-color:#fff;color:#fff">(55) 5419 9450</a></div>
+        <div><div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#b9b5a8;margin-bottom:10px;font-weight:500">CancÃºn</div>DirecciÃ³n por confirmar<br>CancÃºn, Quintana Roo<br>Comercio exterior y grupos hoteleros<br><a href="tel:+529980000000" style="color:#fff;border-bottom:1px solid rgba(246,244,238,.35);display:inline-block;margin-top:8px;transition:border-color .3s ease" style-hover="border-color:#fff;color:#fff">(998) 000 0000</a></div>
+      </div>
+      <div data-rv style="font-size:14px;line-height:1.6;color:#d6d3c8;max-width:44ch"><span style="color:#b9b5a8;font-size:11px;letter-spacing:.14em;text-transform:uppercase;display:block;margin-bottom:8px;font-weight:500">Para la llamada, tenga a la mano</span>El oficio o resoluciÃ³n, la fecha de notificaciÃ³n y el RFC de la sociedad.</div>
+    </div>
+    <div data-rv data-ea-cierre style="grid-column:7/span 6;min-width:280px;display:flex;flex-direction:column;gap:26px;background:#f6f4ee;color:#121a13;padding:clamp(26px,3vw,44px);box-shadow:0 40px 80px -40px rgba(0,0,0,.5);border-radius:var(--r2)">
+      <div>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:14px"><span style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#5b625b;font-weight:500">Asunto</span><span style="font-size:12px;color:#5b625b">elija o cambie aquÃ­</span></div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <sc-for list="{{ chips }}" as="c" hint-placeholder-count="8">
+            <button onClick="{{ c.select }}" style="{{ c.style }}">{{ c.label }}</button>
+          </sc-for>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <a href="#agenda" style="display:flex;align-items:center;justify-content:space-between;gap:14px;padding:18px 22px;background:#01390d;color:#fff;border-radius:var(--r);transition:background .3s ease" style-hover="background:#8a6a2a;color:#fff">
+          <span><span style="display:block;font-size:15.5px;font-weight:500">Agendar llamada de 20 minutos</span><span style="display:block;font-size:12.5px;opacity:.8;margin-top:4px">Con el socio de {{ materia }}</span></span>
+          <span class="ea-arrow" style="font-size:18px">â†’</span>
+        </a>
+        <a href="{{ mailtoHref }}" style="display:flex;align-items:center;justify-content:space-between;gap:14px;padding:18px 22px;border:1px solid rgba(1,57,13,.3);color:#01390d;border-radius:var(--r);transition:border-color .3s ease,background .3s ease" style-hover="border-color:#01390d;background:#eeebe3;color:#01390d">
+          <span><span style="display:block;font-size:15.5px;font-weight:500">Escribir al despacho</span><span style="display:block;font-size:12.5px;color:#5b625b;margin-top:4px">contacto@espinozabogados.com Â· asunto prellenado</span></span>
+          <span class="ea-arrow" style="font-size:18px">â†’</span>
+        </a>
+      </div>
+      <span style="font-size:12px;color:#5b625b;line-height:1.5">Contactarnos no crea una relaciÃ³n abogadoâ€“cliente. Sus datos se tratan conforme al aviso de privacidad.</span>
+    </div>
+  </div>
+</section>
+
+<footer style="background:#06290d;color:#b9b5a8">
+  <div style="max-width:1360px;margin:0 auto;padding:60px clamp(24px,5vw,72px) 30px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:40px 48px">
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <span style="width:48px;height:48px;background:#f6f4ee;mask:url(assets/ea-logo.svg) center/contain no-repeat;opacity:.9"></span>
+      <div style="font-family:Newsreader,serif;font-size:19px;color:#f6f4ee">Espinoza Abogados</div>
+      <div style="font-size:12.5px;line-height:1.6">Paolo Espinoza y Asociados, S.C.<br>Ciudad de MÃ©xico Â· CancÃºn</div>
+      <a href="#linkedin-despacho" style="display:inline-flex;align-items:center;gap:8px;color:#f6f4ee;font-size:13px;margin-top:4px" style-hover="color:#c4a25e"><span style="display:inline-grid;place-items:center;width:22px;height:22px;border:1px solid rgba(246,244,238,.4);font-size:11px;font-weight:600">in</span>LinkedIn</a>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:11px;font-size:13.5px">
+      <span style="font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:#8f8c82;margin-bottom:6px">NavegaciÃ³n</span>
+      <a href="#areas" style="color:#b9b5a8" style-hover="color:#fff">Ãreas de prÃ¡ctica</a>
+      <a href="#metodo" style="color:#b9b5a8" style-hover="color:#fff">MÃ©todo</a>
+      <a href="#equipo" style="color:#b9b5a8" style-hover="color:#fff">Socios</a>
+      <a href="#casos" style="color:#b9b5a8" style-hover="color:#fff">Casos</a>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:11px;font-size:13.5px">
+      <span style="font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:#8f8c82;margin-bottom:6px">Ciudad de MÃ©xico</span>
+      <a href="tel:+525554199450" style="color:#b9b5a8" style-hover="color:#fff">(55) 5419 9450</a>
+      <span>Av. RevoluciÃ³n 1225, Piso 4</span>
+      <span style="font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:#8f8c82;margin:14px 0 6px">CancÃºn</span>
+      <a href="tel:+529980000000" style="color:#b9b5a8" style-hover="color:#fff">(998) 000 0000</a>
+      <span>DirecciÃ³n por confirmar</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:11px;font-size:13.5px">
+      <span style="font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:#8f8c82;margin-bottom:6px">Legal</span>
+      <a href="mailto:contacto@espinozabogados.com" style="color:#b9b5a8" style-hover="color:#fff">contacto@espinozabogados.com</a>
+      <a href="#contacto" style="color:#b9b5a8" style-hover="color:#fff">Aviso de privacidad</a>
+      <span style="font-size:12px;line-height:1.6;color:#8f8c82">Contenido informativo; no constituye asesorÃ­a legal.</span>
+    </div>
+  </div>
+  <div style="max-width:1360px;margin:0 auto;padding:18px clamp(24px,5vw,72px) 40px;border-top:1px solid rgba(176,141,74,.4);font-size:11.5px;color:#8f8c82">Â© 2026 Paolo Espinoza y Asociados, S.C. Todos los derechos reservados.</div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;animaciones&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;RevisiÃ³n&quot;},&quot;mostrarFotos&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Contenido&quot;},&quot;radio&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:3,&quot;min&quot;:0,&quot;max&quot;:24,&quot;step&quot;:1,&quot;unit&quot;:&quot;px&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Estilo&quot;}}">
+const AREAS = [
+  { folio: "01", titulo: "Materialidad y razÃ³n de negocios",
+    resumen: "Construimos y defendemos el expediente que prueba que cada operaciÃ³n relevante existiÃ³: antes de la revisiÃ³n, durante la auditorÃ­a y en juicio.",
+    incluye: ["DiagnÃ³stico del expediente de operaciones relevantes", "VerificaciÃ³n y monitoreo de proveedores en listados 69-B", "Protocolo de materialidad con finanzas, compras y jurÃ­dico", "Defensa de la deducciÃ³n y el acreditamiento cuestionados"],
+    senal: "Un proveedor apareciÃ³ en el listado 69-B o la autoridad pide evidencia de que el servicio se prestÃ³." },
+  { folio: "02", titulo: "Litigio y defensa fiscal",
+    resumen: "Llevamos el asunto desde el primer requerimiento hasta la Ãºltima instancia, con la estrategia definida antes de contestar.",
+    incluye: ["Recurso de revocaciÃ³n ante el SAT", "Juicio de nulidad ante el TFJA", "Amparo directo e indirecto", "GarantÃ­a del interÃ©s fiscal y suspensiÃ³n del cobro"],
+    senal: "Le notificaron un crÃ©dito fiscal a la empresa y el plazo ya estÃ¡ corriendo." },
+  { folio: "03", titulo: "AuditorÃ­as y revisiones",
+    resumen: "AcompaÃ±amiento durante visitas domiciliarias, revisiones de gabinete y electrÃ³nicas, cuidando cada actuaciÃ³n que quedarÃ¡ en el expediente.",
+    incluye: ["AtenciÃ³n de requerimientos de informaciÃ³n", "Control de plazos y actas parciales", "IntegraciÃ³n del soporte documental con contabilidad", "Cierre y, si procede, impugnaciÃ³n"],
+    senal: "La empresa recibiÃ³ una orden de visita o una carta invitaciÃ³n." },
+  { folio: "04", titulo: "Devoluciones y compensaciones",
+    resumen: "RecuperaciÃ³n de saldos a favor con el soporte armado desde el inicio, para que la negativa no se repita.",
+    incluye: ["RevisiÃ³n de la procedencia del saldo", "IntegraciÃ³n del expediente de soporte", "Solicitud y seguimiento ante la autoridad", "Defensa contra negativas o desistimientos"],
+    senal: "Hay IVA a favor negado o detenido y afecta el flujo." },
+  { folio: "05", titulo: "Precios de transferencia",
+    resumen: "RevisiÃ³n de operaciones entre partes relacionadas y defensa del criterio adoptado frente a la autoridad.",
+    incluye: ["AnÃ¡lisis funcional de las operaciones intercompaÃ±Ã­a", "RevisiÃ³n de estudios existentes", "Ajustes y documentaciÃ³n de respaldo", "Defensa del criterio en revisiÃ³n"],
+    senal: "El grupo opera con partes relacionadas en el extranjero." },
+  { folio: "06", titulo: "Comercio exterior y aduanas",
+    resumen: "ClasificaciÃ³n, programas de fomento y defensa frente a crÃ©ditos determinados por la autoridad aduanera. Oficina en CancÃºn.",
+    incluye: ["ClasificaciÃ³n arancelaria y criterios aplicables", "IMMEX, PROSEC y otros programas", "Defensa en PAMA", "RegularizaciÃ³n de mercancÃ­a"],
+    senal: "Embargaron mercancÃ­a o iniciaron un PAMA en la operaciÃ³n." },
+  { folio: "07", titulo: "Fiscal internacional",
+    resumen: "AplicaciÃ³n de tratados, retenciones a residentes en el extranjero y operaciÃ³n de grupos multinacionales en MÃ©xico.",
+    incluye: ["AplicaciÃ³n de tratados para evitar doble tributaciÃ³n", "Retenciones y tasas aplicables", "Establecimiento permanente", "RepatriaciÃ³n de utilidades"],
+    senal: "Una filial extranjera empieza a operar o cobrar en MÃ©xico." },
+  { folio: "08", titulo: "ConsultorÃ­a y planeaciÃ³n fiscal",
+    resumen: "Revisamos la estructura actual, medimos el riesgo de cada operaciÃ³n y proponemos alternativas sostenibles dentro del marco legal vigente.",
+    incluye: ["DiagnÃ³stico de la estructura corporativa y sus operaciones", "OpiniÃ³n escrita con fundamento y grado de riesgo", "Alternativas de implementaciÃ³n y su costo fiscal", "AcompaÃ±amiento en la ejecuciÃ³n"],
+    senal: "El grupo va a reestructurar, vender o abrir una filial." }
+];
+
+const TRIAGE = [
+  { label: "Nos cuestionan la materialidad de operaciones", nivel: 3, urgencia: "Alta", plazoN: 30, plazoT: " dÃ­as hÃ¡biles", fuente: "Para acreditar la materialidad cuando el proveedor aparece en el listado definitivo (CFF 69-B).", paso: "Reconstruir el expediente de cada operaciÃ³n cuestionada: contrato, capacidad del proveedor, entrega, pago y razÃ³n de negocios.", area: "Materialidad y razÃ³n de negocios", areaIdx: 0 },
+  { label: "Nos determinaron un crÃ©dito fiscal", nivel: 3, urgencia: "Alta", plazoN: 30, plazoT: " dÃ­as hÃ¡biles", fuente: "Recurso de revocaciÃ³n (CFF 121) o juicio de nulidad (LFPCA 13).", paso: "Fijar la fecha exacta de notificaciÃ³n, resolver la garantÃ­a del interÃ©s fiscal y elegir la vÃ­a antes de que finanzas conteste nada.", area: "Litigio y defensa fiscal", areaIdx: 1 },
+  { label: "Recibimos una carta invitaciÃ³n o un requerimiento", nivel: 2, urgencia: "Media", plazoN: null, plazoT: "El del oficio", fuente: "Normalmente 10 a 15 dÃ­as hÃ¡biles; una carta invitaciÃ³n no obliga, pero conviene responder.", paso: "Delimitar el alcance real del requerimiento y coordinar con contabilidad la entrega de exactamente lo pedido, ni mÃ¡s ni menos.", area: "AuditorÃ­as y revisiones", areaIdx: 2 },
+  { label: "Hay una visita o revisiÃ³n electrÃ³nica en curso", nivel: 2, urgencia: "Media", plazoN: 12, plazoT: " meses mÃ¡x.", fuente: "DuraciÃ³n de la revisiÃ³n (CFF 46-A); 20 dÃ­as para desvirtuar la Ãºltima acta.", paso: "Un solo interlocutor frente a la autoridad, control de plazos y actas parciales para que el expediente nos sirva despuÃ©s.", area: "AuditorÃ­as y revisiones", areaIdx: 2 },
+  { label: "Tenemos IVA a favor negado o detenido", nivel: 2, urgencia: "Media", plazoN: 30, plazoT: " dÃ­as hÃ¡biles", fuente: "Para impugnar la negativa. La autoridad tiene 40 dÃ­as para resolver (CFF 22).", paso: "Revisar por quÃ© se negÃ³ e integrar el soporte con contabilidad para que el flujo no vuelva a quedarse detenido.", area: "Devoluciones y compensaciones", areaIdx: 3 },
+  { label: "Embargaron mercancÃ­a o hay un PAMA", nivel: 3, urgencia: "Alta", plazoN: 10, plazoT: " dÃ­as hÃ¡biles", fuente: "Para ofrecer pruebas y alegatos (Ley Aduanera 150).", paso: "Liberar la mercancÃ­a para no detener la operaciÃ³n y atacar la clasificaciÃ³n o el origen desde el primer escrito.", area: "Comercio exterior y aduanas", areaIdx: 5 },
+  { label: "Nos revisan precios de transferencia", nivel: 2, urgencia: "Media", plazoN: null, plazoT: "El de la revisiÃ³n", fuente: "DocumentaciÃ³n comprobatoria exigible en la propia revisiÃ³n (LISR 76-IX, 76-A).", paso: "Revisar el estudio existente, el anÃ¡lisis funcional y defender el criterio adoptado frente a la autoridad.", area: "Precios de transferencia", areaIdx: 4 },
+  { label: "Vamos a reestructurar, vender o abrir filial", nivel: 1, urgencia: "PlaneaciÃ³n", plazoN: null, plazoT: "Antes de firmar", fuente: "El efecto fiscal se decide en la estructura, no despuÃ©s.", paso: "DiagnÃ³stico de la estructura y opiniÃ³n escrita con el riesgo de cada alternativa, lista para el consejo.", area: "ConsultorÃ­a y planeaciÃ³n fiscal", areaIdx: 7 }
+];
+
+class Component extends DCLogic {
+  state = { area: 0, tri: 0, materia: 0, menuOpen: false, narrow: false, chipsEnd: false };
+
+  componentDidMount() {
+    this.io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        const el = e.target;
+        const d = el.getAttribute("data-rv-i") || 0;
+        setTimeout(() => { el.style.opacity = "1"; el.style.transform = "none"; }, d * 90);
+        this.io.unobserve(el);
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+    if (this.props.animaciones === false) this.showAll(); else this.prep();
+    this.nav();
+    this.onScroll = () => {
+      const h = document.querySelector("[data-ea-header]");
+      const inner = document.querySelector("[data-ea-headin]");
+      if (!h || !inner) return;
+      const s = window.scrollY > 40;
+      inner.style.paddingTop = s ? "10px" : "18px";
+      inner.style.paddingBottom = s ? "10px" : "18px";
+      h.style.boxShadow = s ? "0 1px 20px -8px rgba(1,57,13,.25)" : "none";
+    };
+    window.addEventListener("scroll", this.onScroll, { passive: true });
+    this.onResize = () => {
+      const n = window.innerWidth < 860;
+      if (n !== this.state.narrow) this.setState({ narrow: n, menuOpen: false });
+      this.chipsScrolled();
+    };
+    this.onResize();
+    window.addEventListener("resize", this.onResize);
+    setTimeout(() => this.chipsScrolled(), 300);
+  }
+
+  chipsScrolled() {
+    const c = document.querySelector("[data-ea-chips]");
+    const bar = document.querySelector("[data-ea-chipbar]");
+    if (!c) return;
+    const max = c.scrollWidth - c.clientWidth;
+    const end = max <= 4 || c.scrollLeft >= max - 4;
+    if (bar) {
+      const w = Math.max(10, (c.clientWidth / c.scrollWidth) * 100);
+      bar.style.width = w + "%";
+      bar.style.transform = "translateX(" + (max > 0 ? (c.scrollLeft / max) * (100 / w - 1) * 100 : 0) + "%)";
+    }
+    if (end !== this.state.chipsEnd) this.setState({ chipsEnd: end });
+  }
+
+  showAll() {
+    document.querySelectorAll("[data-rv]").forEach((el) => { el.style.opacity = "1"; el.style.transform = "none"; });
+  }
+
+  nav() {
+    document.querySelectorAll("[data-ea-navlink]").forEach((a) => {
+      if (a.dataset.navReady) return;
+      a.dataset.navReady = "1";
+      const u = document.createElement("span");
+      u.style.cssText = "position:absolute;left:12px;right:12px;bottom:5px;height:1px;background:#b08d4a;transform:scaleX(0);transform-origin:left;transition:transform .45s cubic-bezier(.22,1,.36,1)";
+      a.appendChild(u);
+      a.addEventListener("mouseenter", () => { u.style.transformOrigin = "left"; u.style.transform = "scaleX(1)"; });
+      a.addEventListener("mouseleave", () => { u.style.transformOrigin = "right"; u.style.transform = "scaleX(0)"; });
+    });
+  }
+
+  prep() {
+    document.querySelectorAll("[data-rv]").forEach((el) => {
+      if (el.dataset.rvReady) return;
+      el.dataset.rvReady = "1";
+      const line = el.getAttribute("data-rv") === "line";
+      const sibs = Array.from(el.parentElement ? el.parentElement.children : []).filter((n) => n.hasAttribute && n.hasAttribute("data-rv"));
+      el.setAttribute("data-rv-i", String(Math.min(sibs.indexOf(el), 7)));
+      el.style.opacity = line ? "1" : "0";
+      el.style.transform = line ? "scaleX(0)" : "translateY(26px)";
+      el.style.transition = line ? "transform 1.8s cubic-bezier(.22,1,.36,1)" : "opacity 1s cubic-bezier(.22,1,.36,1), transform 1s cubic-bezier(.22,1,.36,1)";
+      this.io.observe(el);
+    });
+  }
+
+  componentDidUpdate() {
+    this.nav();
+    if (this.props.animaciones === false) this.showAll(); else this.prep();
+  }
+
+  componentWillUnmount() {
+    if (this.io) this.io.disconnect();
+    if (this.cntRaf) cancelAnimationFrame(this.cntRaf);
+    window.removeEventListener("scroll", this.onScroll);
+    window.removeEventListener("resize", this.onResize);
+  }
+
+  goArea(i) {
+    if (this.state.area === i || this.targetArea === i) return;
+    this.targetArea = i;
+    const p = document.querySelector("[data-ea-panel-body]");
+    if (!p) { this.setState({ area: i }); return; }
+    p.style.transition = "opacity .2s ease, transform .2s ease";
+    p.style.opacity = "0";
+    p.style.transform = "translateY(6px)";
+    clearTimeout(this.swapT);
+    this.swapT = setTimeout(() => {
+      this.targetArea = null;
+      this.setState({ area: i }, () => {
+        const q = document.querySelector("[data-ea-panel-body]");
+        if (!q) return;
+        q.style.transition = "opacity .55s cubic-bezier(.22,1,.36,1), transform .55s cubic-bezier(.22,1,.36,1)";
+        q.style.opacity = "1";
+        q.style.transform = "none";
+      });
+    }, 210);
+  }
+
+  animateIn(sel) {
+    const b = document.querySelector(sel);
+    if (b && b.animate) b.animate([{ opacity: 0, transform: "translateY(10px)" }, { opacity: 1, transform: "none" }], { duration: 500, easing: "cubic-bezier(.22,1,.36,1)" });
+  }
+
+  triageFx(t) {
+    if (this.cntRaf) cancelAnimationFrame(this.cntRaf);
+    if (t.plazoN) {
+      const t0 = performance.now();
+      const tick = (now) => {
+        const p = Math.min(1, (now - t0) / 650);
+        this.setState({ cnt: Math.round(t.plazoN * (1 - Math.pow(1 - p, 3))) });
+        this.cntRaf = p < 1 ? requestAnimationFrame(tick) : null;
+      };
+      this.cntRaf = requestAnimationFrame(tick);
+    } else {
+      this.setState({ cnt: null });
+    }
+    document.querySelectorAll("[data-ea-seg]").forEach((s, i) => {
+      if (s.animate) s.animate([{ transform: "scaleX(0)" }, { transform: "scaleX(1)" }], { duration: 380, delay: i * 110, easing: "cubic-bezier(.22,1,.36,1)", fill: "backwards" });
+    });
+  }
+
+  renderVals() {
+    const { area: act, tri, narrow, menuOpen, materia } = this.state;
+    const areas = AREAS.map((a, i) => {
+      const on = i === act;
+      return {
+        folio: a.folio, titulo: a.titulo,
+        rowStyle: "display:grid;grid-template-columns:34px 1fr 20px;gap:16px;align-items:center;padding:20px 18px 20px " + (on ? "26px" : "14px") +
+          ";cursor:pointer;border-bottom:1px solid rgba(1,57,13,.14);background:" + (on ? "#f6f4ee" : "transparent") + ";color:" + (on ? "#01390d" : "#3a463d") +
+          ";box-shadow:inset " + (on ? "3px" : "0px") + " 0 0 #b08d4a" +
+          ";transition:background .4s cubic-bezier(.22,1,.36,1),color .3s ease,box-shadow .4s cubic-bezier(.22,1,.36,1),padding-left .45s cubic-bezier(.22,1,.36,1)",
+        arrowStyle: "color:#8a6a2a;font-size:17px;opacity:" + (on ? "1" : "0") + ";transform:" + (on ? "none" : "translateX(-10px)") + ";transition:opacity .4s ease,transform .5s cubic-bezier(.22,1,.36,1)",
+        select: () => this.goArea(i),
+        hover: () => { clearTimeout(this.hoverT); this.hoverT = setTimeout(() => this.goArea(i), 220); },
+        unhover: () => clearTimeout(this.hoverT)
+      };
+    });
+    const tBase = TRIAGE[tri];
+    const t = this.state.cnt != null && tBase.plazoN ? Object.assign({}, tBase, { plazoN: this.state.cnt }) : tBase;
+    const triage = TRIAGE.map((x, i) => {
+      const on = i === tri;
+      return {
+        label: x.label,
+        btnStyle: "flex:none;display:inline-flex;align-items:center;gap:10px;padding:11px 16px;border-radius:999px;border:1px solid " + (on ? "#b08d4a" : "rgba(246,244,238,.22)") +
+          ";background:" + (on ? "rgba(176,141,74,.16)" : "transparent") + ";color:" + (on ? "#fff" : "#d6d3c8") +
+          ";font-size:13.5px;line-height:1.2;cursor:pointer;white-space:nowrap;transition:background .3s ease,border-color .3s ease,color .3s ease",
+        dotStyle: "flex:none;width:7px;height:7px;border-radius:50%;background:" + (on ? "#b08d4a" : "rgba(246,244,238,.3)") + ";transition:background .3s ease" + (on ? ";animation:ea-pulse 2.2s ease-in-out infinite" : ""),
+        select: () => { if (this.state.tri !== i) this.setState({ tri: i, materia: x.areaIdx }, () => { this.animateIn("[data-ea-triage]"); this.triageFx(x); }); }
+      };
+    });
+    const seg = (n) => "display:block;width:26px;height:5px;border-radius:2px;transform-origin:left;background:" + (t.nivel >= n ? (t.nivel === 3 ? "#d4b06a" : t.nivel === 2 ? "#b08d4a" : "#b9b5a8") : "rgba(246,244,238,.18)") + ";transition:background .4s ease";
+    const chips = AREAS.map((a, i) => {
+      const on = i === materia;
+      return {
+        label: a.titulo,
+        style: "padding:9px 13px;border-radius:999px;border:1px solid " + (on ? "#01390d" : "rgba(1,57,13,.25)") + ";background:" + (on ? "#01390d" : "transparent") + ";color:" + (on ? "#f6f4ee" : "#3a463d") + ";font-size:12.5px;line-height:1.2;cursor:pointer;transition:background .3s ease,border-color .3s ease,color .3s ease",
+        select: () => this.setState({ materia: i })
+      };
+    });
+    const mat = AREAS[materia].titulo;
+    const setMat = (i) => () => this.setState({ materia: i }, () => this.animateIn("[data-ea-cierre]"));
+    const r = Number(this.props.radio ?? 3);
+    return {
+      rootStyle: "max-width:100%;overflow-x:clip;--r:" + r + "px;--r2:" + Math.round(r * 2.5) + "px",
+      areas, activa: AREAS[act], triage, activo: t, seg1: seg(1), seg2: seg(2), seg3: seg(3),
+      chips, materia: mat,
+      mailtoHref: "mailto:contacto@espinozabogados.com?subject=" + encodeURIComponent("Consulta Â· " + mat) + "&body=" + encodeURIComponent("Empresa:\nSituaciÃ³n y etapa:\nAutoridad involucrada:\nPlazo, si hay uno corriendo:\n"),
+      prefill: setMat(t.areaIdx), prefillArea: setMat(act), prefillMat: setMat(0),
+      navStyle: "margin-left:auto;align-items:center;gap:2px;display:" + (narrow ? "none" : "flex"),
+      burgerStyle: "margin-left:auto;display:" + (narrow ? "flex" : "none") + ";flex-direction:column;gap:6px;padding:10px;background:transparent;border:0;cursor:pointer",
+      menuOpen: narrow && menuOpen,
+      onChipsScroll: () => this.chipsScrolled(),
+      chipsNext: () => { const c = document.querySelector("[data-ea-chips]"); if (c) c.scrollBy({ left: c.clientWidth * 0.7, behavior: "smooth" }); },
+      chipsFadeStyle: "position:absolute;right:0;top:0;bottom:14px;width:140px;pointer-events:none;background:linear-gradient(90deg,rgba(1,57,13,0),#01390d 70%);transition:opacity .3s ease;opacity:" + (this.state.chipsEnd ? "0" : "1"),
+      chipsNextStyle: "position:absolute;right:0;top:0;height:calc(100% - 14px);display:flex;align-items:center;gap:8px;padding:0 4px 0 12px;border:0;background:transparent;color:#fff;font-size:18px;cursor:pointer;transition:opacity .3s ease;opacity:" + (this.state.chipsEnd ? "0" : "1") + ";pointer-events:" + (this.state.chipsEnd ? "none" : "auto"),
+      toggleMenu: () => this.setState((s) => ({ menuOpen: !s.menuOpen })),
+      closeMenu: () => this.setState({ menuOpen: false })
+    };
+  }
+}
+</script>
+</body>
+</html>
